@@ -11,6 +11,9 @@ import ProfileClientApplications from './ProfileClientApplications';
 import ProfileFreelancerApplications from './ProfileFreelancerApplications';
 import ProfileOngoingJobs from './ProfileOngoingJobs';
 import DraftModal from '../DraftModal';
+import ClientApprovals from './ClientApprovals';
+import CompletedJobs from './CompletedJobs';
+import SubmittedJobs from './SubmittedJobs';
 const Profile = () => {
   const [activeTab, setActiveTab] = useState("details");
   const [profile, setProfile] = useState(null);
@@ -196,7 +199,7 @@ const Profile = () => {
             userData?.details?.role === 'client' ?
               <div className="flex gap-6 border-b mb-6">
 
-                {["details", "applieds", , "ongoing"].map(tab => (
+                {["details", "applieds", , "ongoing",'approval','completed'].map(tab => (
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
@@ -212,7 +215,7 @@ const Profile = () => {
               :
               <div className="flex gap-6 border-b mb-6">
 
-                {["details", "groups", "applieds", "ongoing"].map(tab => (
+                {["details", "groups", "applieds", "ongoing",'submitted','completed'].map(tab => (
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
@@ -460,12 +463,32 @@ const Profile = () => {
 
 
 
+
         {activeTab === "applieds" && (
           <div className="bg-white p-6 rounded-xl shadow-sm">
             {userData?.details?.role === 'client' ?
               <ProfileClientApplications />
               :
               <ProfileFreelancerApplications />}
+          </div>
+        )}
+        {activeTab === "approval" && (
+          <div className="bg-white p-6 rounded-xl shadow-sm">
+              <ClientApprovals />
+              
+          </div>
+        )}
+        {activeTab === "submitted" && (
+          <div className="bg-white p-6 rounded-xl shadow-sm">
+              <SubmittedJobs />
+              
+          </div>
+        )}
+        
+        {activeTab === "completed" && (
+          <div className="bg-white p-6 rounded-xl shadow-sm">
+              <CompletedJobs />
+              
           </div>
         )}
 

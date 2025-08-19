@@ -1,46 +1,49 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { MdWork, MdAttachMoney, MdEmail } from 'react-icons/md';
-import { FaGlobe } from 'react-icons/fa';
-import { apiClient } from '../../apiClient';
-import { UserData } from '../../App';
+import React, { useState, useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
+import { MdWork } from "react-icons/md";
+import { FaGlobe } from "react-icons/fa";
+import { apiClient } from "../../apiClient";
+import { UserData } from "../../App";
+import ApplicationModal from "../ApplicationModal";
 
 const JobPage = () => {
   const { id } = useParams();
+  const userData = useContext(UserData);
+
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [applying, setApplying] = useState(false);
-const userData = useContext(UserData)
- useEffect(() => {
-  const fetchJob = async () => {
-    try {
-      setLoading(true); // Start loading
-      const data = await apiClient(`http://localhost:8000/job/${id}`, 'GET');
-      setJob(data.job); // Assuming the response has a 'gig' property
-      console.log('get', data);
-    } catch (error) {
-      console.error('Error fetching gig:', error);
-      // You might want to set some error state here
-    } finally {
-      setLoading(false); // Stop loading whether successful or not
-    }
-  };
 
-  fetchJob();
-}, [id]);
+  const [status, setStatus] = useState(null); // 👈 application status
+  const [showApplyModal, setShowApplyModal] = useState(false);
 
-  const handleApply = async () => {
-    try {
-      setApplying(true);
-      // Add your apply logic here
-      console.log('Applying to job:', job.id);
-      // Example: await apiClient(`/jobs/${id}/apply/`, 'POST');
-    } catch (error) {
-      console.error('Error applying:', error);
-    } finally {
-      setApplying(false);
-    }
-  };
+  // Fetch job details + status
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+
+        // Fetch job details
+        const data = await apiClient(`http://localhost:8000/job/${id}`, "GET");
+        console.log('AI data',data)
+        setJob(data.job);
+
+        // Fetch application status (only if freelancer)
+        if (userData?.details?.role === "freelancer") {
+          const statusRes = await apiClient(
+            `http://localhost:8000/jobapplication/status/${id}/`,
+            "GET"
+          );
+          setStatus(statusRes.status);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [id, userData]);
 
   if (loading) {
     return (
@@ -58,6 +61,34 @@ const userData = useContext(UserData)
     );
   }
 
+  // UI for application status
+  const renderStatus = () => {
+    if (!status || status === "not_applied") {
+      return (
+        <button
+          onClick={() => setShowApplyModal(true)}
+          className="w-full py-2 text-white rounded-lg bg-indigo-600 hover:bg-indigo-700 transition"
+        >
+          Apply Now
+        </button>
+      );
+    }
+
+    let color = "bg-gray-400";
+    if (status === "pending") color = "bg-yellow-500";
+    if (status === "hired") color = "bg-green-500";
+    if (status === "ongoing") color = "bg-blue-500";
+    if (status === "rejected") color = "bg-red-500";
+
+    return (
+      <div
+        className={`w-full py-2 text-center text-white rounded-lg font-semibold ${color}`}
+      >
+        {status.charAt(0).toUpperCase() + status.slice(1)}
+      </div>
+    );
+  };
+
   return (
     <div className="max-w-6xl mx-auto py-8 px-4">
       {/* Job Header */}
@@ -71,15 +102,14 @@ const userData = useContext(UserData)
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Main Job Content */}
+        {/* Job Details */}
         <div className="lg:col-span-2">
-          <div className="mb-8">
+          <section className="mb-8">
             <h2 className="text-xl font-semibold mb-4">Job Description</h2>
             <p className="text-gray-700 whitespace-pre-line">{job.description}</p>
-          </div>
+          </section>
 
-          {/* Tags */}
-          <div className="mb-8">
+          <section className="mb-8">
             <h2 className="text-xl font-semibold mb-4">Required Skills</h2>
             <div className="flex flex-wrap gap-2">
               {job.tags.map((tag, index) => (
@@ -91,11 +121,12 @@ const userData = useContext(UserData)
                 </span>
               ))}
             </div>
-          </div>
+          </section>
         </div>
 
-        {/* Client Info and Action Panel */}
-        <div className="border rounded-lg p-6 h-fit">
+        {/* Client Info + Apply Section */}
+        <aside className="border rounded-lg p-6 h-fit">
+          {/* Client Info */}
           <div className="flex items-center mb-4">
             <img
               src={job.client.profilepic}
@@ -119,9 +150,9 @@ const userData = useContext(UserData)
             {job.client.portfolio_link && (
               <div className="flex items-center">
                 <FaGlobe className="text-gray-500 mr-2" />
-                <a 
-                  href={job.client.portfolio_link} 
-                  target="_blank" 
+                <a
+                  href={job.client.portfolio_link}
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="text-indigo-600 hover:underline"
                 >
@@ -131,24 +162,33 @@ const userData = useContext(UserData)
             )}
           </div>
 
+          {/* Budget + Apply/Status */}
           <div className="border-t pt-4">
             <div className="flex justify-between items-center mb-4">
               <span className="font-semibold">Budget</span>
               <span className="text-xl font-bold">${job.budget}</span>
             </div>
-            {userData?.details?.role === 'client'?'':<button 
-              onClick={handleApply}
-              disabled={applying}
-              className={`w-full py-2 text-white rounded-lg transition ${applying 
-                ? 'bg-indigo-400 cursor-not-allowed' 
-                : 'bg-indigo-600 hover:bg-indigo-700'}`}
-            >
-              {applying ? 'Applying...' : 'Apply Now'}
-            </button>}
-            
+
+            {userData?.details?.role === "client" ? null : renderStatus()}
           </div>
-        </div>
+        </aside>
       </div>
+
+      {/* Application Modal */}
+      <ApplicationModal
+        isOpen={showApplyModal}
+        onClose={() => setShowApplyModal(false)}
+        jobData={job}
+        jobId={job.id}
+        onSuccess={async () => {
+          // re-fetch status after applying
+          const statusRes = await apiClient(
+            `http://localhost:8000/jobapplication/status/${job.id}/`,
+            "GET"
+          );
+          setStatus(statusRes.status);
+        }}
+      />
     </div>
   );
 };

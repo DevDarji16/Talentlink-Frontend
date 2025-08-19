@@ -14,7 +14,9 @@ const ProfileOngoingJobs = ({ role }) => {
           role === "client"
             ? "http://localhost:8000/jobstatus/client/ongoing/"
             : "http://localhost:8000/jobstatus/freelancer/ongoing/";
+
         const res = await apiClient(url, "GET");
+        console.log("ongoing", res);
         setJobs(res.data || []);
       } catch (err) {
         console.error("Error fetching ongoing jobs:", err);
@@ -22,16 +24,19 @@ const ProfileOngoingJobs = ({ role }) => {
         setLoading(false);
       }
     };
+
     fetchJobs();
   }, [role]);
 
   if (loading) return <p className="text-gray-500">Loading ongoing jobs...</p>;
-  if (!jobs.length)
+
+  if (!jobs.length) {
     return (
       <p className="text-gray-500 italic text-center">
         No ongoing work yet.
       </p>
     );
+  }
 
   return (
     <div className="space-y-6">
@@ -41,31 +46,43 @@ const ProfileOngoingJobs = ({ role }) => {
         let price = "";
         let isGroup = false;
         let groupName = "";
+        let type = ""; // 🔹 Job, Gig or Draft
 
+        // 🔹 Gig Jobs
         if (job.is_gig && job.gig) {
           title = job.gig.title;
           link = `/gig/${job.gig.id}`;
-          price = job.price;
+          price = job.price || job.gig.price;
           isGroup = !!job.gig.group;
           groupName = job.gig.group?.name;
+          type = "Gig";
+
+        // 🔹 Normal Jobs (Application → Job)
         } else if (job.is_job && job.job) {
-          title = job.job.title;
-          link = `/job/${job.job.id}`;
-          price = job.job.price;
-          isGroup = !!job.job.group;
-          groupName = job.job.group?.name;
+          const application = job.job;
+          const jobData = application.job;
+
+          title = jobData?.title || "Untitled Job";
+          link = `/job/${jobData?.id}`;
+          price = application.proposed_price || job.price;
+          isGroup = !!jobData?.group;
+          groupName = jobData?.group?.name;
+          type = "Job";
+
+        // 🔹 Drafts
         } else if (job.is_draft && job.draft) {
           title = job.draft.title;
           link = `/draft/${job.draft.id}`;
-          price = job.draft.price;
+          price = job.price || job.draft.price;
           isGroup = !!job.draft.group;
           groupName = job.draft.group?.name;
+          type = "Draft";
         }
 
         return (
           <div
             key={job.id}
-            onClick={() => navigate(link)}
+            onClick={() => navigate(`/jobstatus/${job.id}`)}
             className="p-5 bg-white border rounded-xl shadow-sm hover:shadow-lg transition cursor-pointer"
           >
             <div className="flex justify-between items-center">
@@ -73,16 +90,23 @@ const ProfileOngoingJobs = ({ role }) => {
                 {title}
               </h3>
 
-              {/* Group / Individual Badge */}
-              <span
-                className={`px-3 py-1 text-xs font-semibold rounded-full ${
-                  isGroup
-                    ? "bg-purple-100 text-purple-700"
-                    : "bg-blue-100 text-blue-700"
-                }`}
-              >
-                {isGroup ? `Group: ${groupName}` : "Individual"}
-              </span>
+              <div className="flex gap-2">
+                {/* Type Badge (Job/Gig/Draft) */}
+                <span className="px-3 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-700">
+                  {type}
+                </span>
+
+                {/* Group / Individual Badge */}
+                <span
+                  className={`px-3 py-1 text-xs font-semibold rounded-full ${
+                    isGroup
+                      ? "bg-purple-100 text-purple-700"
+                      : "bg-blue-100 text-blue-700"
+                  }`}
+                >
+                  {isGroup ? `Group: ${groupName}` : "Individual"}
+                </span>
+              </div>
             </div>
 
             {/* Status */}

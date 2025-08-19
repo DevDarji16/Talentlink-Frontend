@@ -245,7 +245,11 @@ const GigPage = () => {
                 {gig.is_active ? (
                   <>
                     {userData?.details?.role === "client" && (
-                      applicationStatus?.applied ? (
+                      applicationStatus?.in_progress ? (
+                        <div className="w-full mb-1 text-center py-2 rounded-lg bg-blue-100 text-blue-600 font-semibold">
+                          🚀 In Progress
+                        </div>
+                      ) : applicationStatus?.applied ? (
                         <div className="w-full mb-1 text-center py-2 rounded-lg bg-green-100 text-green-600 font-semibold">
                           Application Sent ✅
                         </div>
@@ -258,6 +262,7 @@ const GigPage = () => {
                         </button>
                       )
                     )}
+
                     <button className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition">
                       Message
                     </button>
@@ -267,6 +272,7 @@ const GigPage = () => {
                     ❌ This gig is no longer available
                   </div>
                 )}
+
               </div>
             )}
           </div>

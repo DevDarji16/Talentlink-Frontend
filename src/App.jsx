@@ -35,6 +35,8 @@ import CanvasEditor from './Components/MainPage/CanvasEditor'
 import { Toaster } from 'react-hot-toast'
 import FreelancerApplications from './Components/MainPage/FreelancerApplications'
 import DraftDetail from './Components/DraftDetail'
+import ChatbotWidget from './Components/ChatbotWidget'
+import JobDetail from './Components/JobDetail'
 
 export const Role = createContext()
 export const SetRole = createContext()
@@ -69,6 +71,7 @@ const App = () => {
   }, [])
   return (
     <div>
+      <ChatbotWidget />
       <IsLoggedIn.Provider value={isLoggedIn}>
         <UserData.Provider value={userData}>
 
@@ -112,6 +115,7 @@ const App = () => {
                   <Route path='/gig/:id' element={<GigPage />} />
                   <Route path='/draft/:id' element={<DraftDetail />} />
                     <Route path='/job/:id' element={<JobPage />} />
+                    <Route path='/jobstatus/:id' element={<JobDetail />} />
                 </Route>
 
               </Routes>
