@@ -52,7 +52,7 @@ const DraftApplications = () => {
           {drafts.map((draft) => (
             <li
               key={draft.id}
-              className="p-5 border rounded-lg shadow-md bg-white flex flex-col lg:flex-row justify-between gap-6"
+              className="p-5 border rounded-lg shadow-md  flex flex-col lg:flex-row justify-between gap-6"
             >
               {/* Freelancer Info */}
               <div className="flex items-center gap-3">

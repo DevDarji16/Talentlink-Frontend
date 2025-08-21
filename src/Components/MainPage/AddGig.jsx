@@ -93,7 +93,7 @@ const AddGig = () => {
             <div className="max-w-3xl mx-auto py-10 px-6">
 
                 <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                    <label className="block text-sm font-medium  mb-1">Title</label>
                     <input
                         type="text"
 
@@ -103,7 +103,7 @@ const AddGig = () => {
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                    <label className="block text-sm font-medium  mb-1">Description</label>
                     <textarea
                         type="text"
                         className="w-full h-32 border border-gray-300 rounded-md px-3 py-2"
@@ -113,12 +113,12 @@ const AddGig = () => {
                 </div>
 
                 <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Skills</label>
+                    <label className="block text-sm font-medium  mb-1">Skills</label>
                     <TagInput tags={tags} setTags={setTags} />
                 </div>
 
                 <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Price</label>
+                    <label className="block text-sm font-medium  mb-1">Price</label>
                     <input
                         type="number"
                         className="w-full border border-gray-300 rounded-md px-3 py-2"
@@ -128,11 +128,11 @@ const AddGig = () => {
                 </div>
 
                 <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                    <label className="block text-sm font-medium  mb-1">Category</label>
                     <select
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
-                        className="w-full border border-gray-300 rounded-md px-3 py-2"
+                        className="w-full text-black border border-gray-300 rounded-md px-3 py-2"
                     >
                         <option value="">Select a category</option>
                         <option value="Web Development">Web Development</option>
@@ -149,7 +149,7 @@ const AddGig = () => {
 
 
                 <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Cover Images</label>
+                    <label className="block text-sm font-medium  mb-1">Cover Images</label>
 
                     {imagePreview.length > 0 ? (
                         <div className="flex flex-wrap gap-3 mb-3">

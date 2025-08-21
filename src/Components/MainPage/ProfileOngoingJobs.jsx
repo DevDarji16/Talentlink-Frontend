@@ -32,7 +32,7 @@ const ProfileOngoingJobs = ({ role }) => {
 
   if (!jobs.length) {
     return (
-      <p className="text-gray-500 italic text-center">
+      <p className=" italic text-center">
         No ongoing work yet.
       </p>
     );
@@ -83,7 +83,7 @@ const ProfileOngoingJobs = ({ role }) => {
           <div
             key={job.id}
             onClick={() => navigate(`/jobstatus/${job.id}`)}
-            className="p-5 bg-white border rounded-xl shadow-sm hover:shadow-lg transition cursor-pointer"
+            className="p-5  border rounded-xl shadow-sm hover:shadow-lg transition cursor-pointer"
           >
             <div className="flex justify-between items-center">
               <h3 className="text-xl font-semibold text-indigo-600 hover:underline">
@@ -110,33 +110,33 @@ const ProfileOngoingJobs = ({ role }) => {
             </div>
 
             {/* Status */}
-            <p className="text-sm text-gray-600 mt-1">
-              📌 Status:{" "}
-              <span className="capitalize font-medium text-green-600">
+            <p className="text-sm  mt-1">
+              Status:{" "}
+              <span className="capitalize font-medium ">
                 {job.status}
               </span>
             </p>
 
             {/* Price */}
             {price && (
-              <p className="mt-2 text-gray-700 font-medium">
-                💰 Price:{" "}
+              <p className="mt-2  font-medium">
+                Price:{" "}
                 <span className="text-indigo-600 font-semibold">${price}</span>
               </p>
             )}
 
             {/* Client + Freelancer */}
-            <div className="mt-3 text-sm text-gray-700">
-              👤 <span className="font-medium">Client:</span>{" "}
+            <div className="mt-3 text-sm ">
+               <span className="font-medium">Client:</span>{" "}
               {job.client.fullname} <br />
-              👤 <span className="font-medium">Freelancer:</span>{" "}
+               <span className="font-medium">Freelancer:</span>{" "}
               {job.freelancer.fullname}
             </div>
 
             {/* Created At */}
             {job.created_at && (
-              <p className="mt-2 text-xs text-gray-500">
-                📅 Started on{" "}
+              <p className="mt-2 text-xs text-gray-400">
+                 Started on{" "}
                 {new Date(job.created_at).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "short",

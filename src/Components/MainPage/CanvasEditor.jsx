@@ -63,24 +63,14 @@ useEffect(() => {
   return (
     <div className="h-screen flex flex-col">
       {/* Header */}
-      <div className="bg-white border-b p-4 flex flex-wrap items-center justify-center gap-3 sm:justify-between">
+      <div className=" border-b p-4 flex flex-wrap items-center justify-center gap-3 sm:justify-between">
         <input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           className="text-xl font-medium px-2 py-1 border rounded"
         />
-        <div className="flex space-x-2">
-          <button
-            onClick={() => navigate('/canvaslist')}
-            className="px-4 py-2 border rounded"
-          >
-            Back to List
-          </button>
-          {isSaving && (
-            <span className="px-4 py-2 text-gray-500">Saving...</span>
-          )}
-        </div>
+        
       </div>
 
       {/* Excalidraw Canvas */}

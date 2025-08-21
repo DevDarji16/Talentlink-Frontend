@@ -29,11 +29,11 @@ const CompletedJobs = () => {
   }, [userData]);
 
   if (loading)
-    return <p className="text-gray-500 text-center">Loading completed jobs...</p>;
+    return <p className=" text-center">Loading completed jobs...</p>;
 
   if (!jobs.length)
     return (
-      <p className="text-gray-500 italic text-center">
+      <p className=" italic text-center">
         No completed jobs yet.
       </p>
     );
@@ -53,7 +53,7 @@ const CompletedJobs = () => {
           <div
             key={job.id}
             onClick={() => navigate(`/jobstatus/${job.id}`)}
-            className="p-5 bg-white border rounded-xl shadow-sm hover:shadow-lg transition cursor-pointer"
+            className="p-5  border rounded-xl shadow-sm hover:shadow-lg transition cursor-pointer"
           >
             {/* Header */}
             <div className="flex justify-between items-center">
@@ -66,8 +66,8 @@ const CompletedJobs = () => {
             </div>
 
             {/* Status */}
-            <p className="text-sm text-gray-600 mt-1">
-              📌 Status:{" "}
+            <p className="text-sm  mt-1">
+               Status:{" "}
               <span className="capitalize font-medium text-green-600">
                 {job.status}
               </span>
@@ -75,8 +75,8 @@ const CompletedJobs = () => {
 
             {/* Price */}
             {job.price && (
-              <p className="mt-1 text-gray-700 font-medium">
-                💰 Price:{" "}
+              <p className="mt-1  font-medium">
+                 Price:{" "}
                 <span className="text-indigo-600 font-semibold">
                   ${job.price}
                 </span>
@@ -100,8 +100,8 @@ const CompletedJobs = () => {
 
             {/* Completed Date */}
             {job.created_at && (
-              <p className="mt-2 text-xs text-gray-500">
-                ✅ Completed on{" "}
+              <p className="mt-2 text-xs ">
+                 Completed on{" "}
                 {new Date(job.created_at).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "short",

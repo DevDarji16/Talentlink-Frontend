@@ -37,15 +37,20 @@ import FreelancerApplications from './Components/MainPage/FreelancerApplications
 import DraftDetail from './Components/DraftDetail'
 import ChatbotWidget from './Components/ChatbotWidget'
 import JobDetail from './Components/JobDetail'
+import TalentLinkHome from './Components/TalentLinkHome'
 
 export const Role = createContext()
 export const SetRole = createContext()
 export const IsLoggedIn = createContext()
 export const UserData = createContext()
+export const Theme = createContext()
+export const ThemeSet = createContext()
 const App = () => {
   const [role, setRole] = useState('')
+  const [theme, setTheme] = useState("light");
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [userData, setUserData] = useState({})
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate()
   const location = useLocation()
   useEffect(() => {
@@ -60,7 +65,7 @@ const App = () => {
       if (data.authenticated) {
         if (location.pathname === '/') {
 
-          navigate('/profile')
+          // navigate('/profile')
         }
 
       }
@@ -70,8 +75,12 @@ const App = () => {
     check_login()
   }, [])
   return (
-    <div>
-      <ChatbotWidget />
+    <div onClick={() => setIsOpen(false)}>
+      <Theme.Provider value={theme}>
+      <ThemeSet.Provider value={setTheme}>
+
+      
+      <ChatbotWidget isOpen={isOpen} setIsOpen={setIsOpen} />
       <IsLoggedIn.Provider value={isLoggedIn}>
         <UserData.Provider value={userData}>
 
@@ -79,7 +88,8 @@ const App = () => {
             <SetRole.Provider value={setRole}>
 
               <Routes>
-                <Route path='/' element={<Home />} />
+                {/* <Route path='/' element={<Home />} /> */}
+                <Route path='/' element={<TalentLinkHome />} />
                 <Route path='/independents' element={<FreelancerPage />} />
                 <Route path='/clients' element={<ClientPage />} />
                 <Route path='/hybrid' element={<BothPage />} />
@@ -125,6 +135,8 @@ const App = () => {
           </Role.Provider>
         </UserData.Provider>
       </IsLoggedIn.Provider>
+      </ThemeSet.Provider>
+      </Theme.Provider>
 
 
     </div>

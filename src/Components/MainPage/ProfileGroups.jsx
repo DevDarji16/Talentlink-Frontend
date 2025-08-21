@@ -46,38 +46,38 @@ const ProfileGroups = () => {
     <div className="p-6 space-y-8">
       {/* My Groups */}
       <div>
-        <h3 className="text-xl font-semibold mb-4 text-gray-800">Groups You Created</h3>
+        <h3 className="text-xl font-semibold mb-4 ">Groups You Created</h3>
         {myGroups.length ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {myGroups.map((group) => (
               <div
                 key={group.id}
                 onClick={() => navigate(`/groups/${group.id}`)}
-                className="p-4 bg-white rounded-lg shadow-sm border hover:shadow-md cursor-pointer transition"
+                className="p-4  rounded-lg shadow-sm border hover:shadow-md cursor-pointer transition"
               >
-                <h4 className="text-lg font-bold text-gray-800">{group.name}</h4>
-                <p className="text-gray-600 text-sm mt-1 line-clamp-2">{group.description}</p>
+                <h4 className="text-lg font-bold ">{group.name}</h4>
+                <p className=" text-sm mt-1 line-clamp-2">{group.description}</p>
               </div>
             ))}
           </div>
         ) : (
-          <p className="text-gray-500">You haven’t created any groups yet.</p>
+          <p className="">You haven’t created any groups yet.</p>
         )}
       </div>
 
       {/* Joined Groups */}
       <div>
-        <h3 className="text-xl font-semibold mb-4 text-gray-800">Groups You Joined</h3>
+        <h3 className="text-xl font-semibold mb-4 ">Groups You Joined</h3>
         {joinedGroups.length ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {joinedGroups.map((group) => (
               <div
                 key={group.id}
                 onClick={() => navigate(`/groups/${group.id}`)}
-                className="p-4 bg-white rounded-lg shadow-sm border hover:shadow-md cursor-pointer transition"
+                className="p-4  rounded-lg shadow-sm border hover:shadow-md cursor-pointer transition"
               >
-                <h4 className="text-lg font-bold text-gray-800">{group.name}</h4>
-                <p className="text-gray-600 text-sm mt-1 line-clamp-2">{group.description}</p>
+                <h4 className="text-lg font-bold ">{group.name}</h4>
+                <p className=" text-sm mt-1 line-clamp-2">{group.description}</p>
               </div>
             ))}
           </div>

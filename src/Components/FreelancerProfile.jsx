@@ -1,18 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { apiClient } from '../apiClient';
 import { FaGlobe, FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from 'react-icons/fa';
 import { MdWork, MdAttachMoney, MdLocationOn } from 'react-icons/md';
+import ReviewsSection from './MainPage/ReviewsSection';
+import { Theme, ThemeSet } from '../App';
 
 const FreelancerProfile = () => {
   const { username } = useParams();
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
+  const theme=useContext(Theme)
+  const setTheme=useContext(ThemeSet)
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const data = await apiClient(`http://localhost:8000/freelancer/${username}/`, 'GET');
+        console.log(data)
         setProfile(data.userprofile);
       } catch (error) {
         console.error('Error fetching profile:', error);
@@ -40,9 +45,10 @@ const FreelancerProfile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className={`${theme==='dark'?'bg-black':''} min-h-screen `}>
       {/* Profile Header */}
-      <div className="bg-white shadow-sm">
+      <div className='flex justify-center'>
+      <div className="border rounded-lg max-w-6xl w-full shadow-sm">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
           <div className="flex flex-col md:flex-row gap-8 items-start">
             <div className="flex-shrink-0">
@@ -56,8 +62,8 @@ const FreelancerProfile = () => {
             <div className="flex-1">
               <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
                 <div>
-                  <h1 className="text-3xl font-bold text-gray-900">{profile.fullname}</h1>
-                  <p className="text-gray-600 mt-1">@{profile.username}</p>
+                  <h1 className="text-3xl font-bold ">{profile.fullname}</h1>
+                  <p className="text-gray-400 mt-1">@{profile.username}</p>
                 </div>
 
                 <div className="flex items-center space-x-4">
@@ -72,7 +78,7 @@ const FreelancerProfile = () => {
                 </div>
               </div>
 
-              <p className="mt-4 text-gray-700">{profile.description}</p>
+              <p className="mt-4 ">{profile.description}</p>
 
               <div className="flex flex-wrap items-center gap-4 mt-4">
                 {profile.location && (
@@ -83,7 +89,7 @@ const FreelancerProfile = () => {
                 )}
 
                 {profile.experience && (
-                  <div className="flex items-center text-gray-600">
+                  <div className="flex items-center ">
                     <MdWork className="mr-2" />
                     <span>{profile.experience} {profile.experience > 1 ? 'years' : 'year'} experience</span>
                   </div>
@@ -148,17 +154,17 @@ const FreelancerProfile = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div></div>
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid  grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Column */}
-          <div className="lg:col-span-2 space-y-8">
+          <div className="lg:col-span-2  space-y-8">
             {/* Skills Section */}
             {profile.skills?.length > 0 && (
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h2 className="text-xl font-semibold mb-4 text-gray-900">Skills & Expertise</h2>
+              <div className=" p-6 rounded-lg border border-gray-400 shadow-sm">
+                <h2 className="text-xl font-semibold mb-4 ">Skills & Expertise</h2>
                 <div className="flex flex-wrap gap-3">
                   {profile.skills.map((skill, i) => (
                     <span
@@ -174,14 +180,14 @@ const FreelancerProfile = () => {
 
             {/* Work Experience */}
             {profile.work_experience?.length > 0 && (
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h2 className="text-xl font-semibold mb-4 text-gray-900">Work Experience</h2>
+              <div className="border border-gray-400 p-6 rounded-lg shadow-sm">
+                <h2 className="text-xl font-semibold mb-4 ">Work Experience</h2>
                 <div className="space-y-6">
                   {profile.work_experience.map((exp, i) => (
                     <div key={i} className="border-l-2 border-indigo-200 pl-4 relative">
                       <div className="absolute -left-2 top-0 w-4 h-4 bg-indigo-500 rounded-full"></div>
                       <div className="ml-2">
-                        <h4 className="font-medium text-gray-900">{exp.position}</h4>
+                        <h4 className="font-medium ">{exp.position}</h4>
                         <p className="text-sm text-gray-500">
                           {exp.company} • {exp.duration}
                         </p>
@@ -195,8 +201,8 @@ const FreelancerProfile = () => {
 
             {/* Projects */}
             {profile.projects?.length > 0 && (
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h2 className="text-xl font-semibold mb-4 text-gray-900">Featured Projects</h2>
+              <div className="border border-gray-400 p-6 rounded-lg shadow-sm">
+                <h2 className="text-xl font-semibold mb-4 ">Featured Projects</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {profile.projects.map((project, i) => (
                     <div key={i} className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
@@ -208,7 +214,7 @@ const FreelancerProfile = () => {
                         />
                       )}
                       <div className="p-4">
-                        <h3 className="text-lg font-bold text-gray-900">{project.title}</h3>
+                        <h3 className="text-lg font-bold ">{project.title}</h3>
                         <p className="text-sm text-gray-600 mt-2">{project.description}</p>
 
                         {project.skills?.length > 0 && (
@@ -241,13 +247,12 @@ const FreelancerProfile = () => {
               </div>
             )}
           </div>
-
           {/* Right Column */}
           <div className="space-y-6">
             {/* Languages */}
             {profile.languages?.length > 0 && (
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h2 className="text-xl font-semibold mb-3 text-gray-900">Languages</h2>
+              <div className="border border-gray-400 p-6 rounded-lg shadow-sm">
+                <h2 className="text-xl font-semibold mb-3 ">Languages</h2>
                 <div className=" flex flex-wrap gap-2">
                   {profile.languages.map((lang, i) => (
 
@@ -265,6 +270,7 @@ const FreelancerProfile = () => {
 
           </div>
         </div>
+            <ReviewsSection  userId={profile.id} />
       </div>
     </div>
   );

@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { apiClient } from "../../apiClient";
 import toast, { Toaster } from "react-hot-toast";
+import { Theme, ThemeSet } from "../../App";
 
 const Wallet = () => {
   const [balance, setBalance] = useState(0);
   const [transactions, setTransactions] = useState([]);
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(true);
+  const theme=useContext(Theme)
+  const setTheme=useContext(ThemeSet)
 
   // Fetch wallet details
   const fetchWallet = async () => {
@@ -60,7 +63,7 @@ const Wallet = () => {
       </div>
 
       {/* Add Money Section */}
-      <div className="bg-white shadow-md rounded-lg p-6 mb-6">
+      <div className="border border-gray-300 shadow-md rounded-lg p-6 mb-6">
         <h3 className="text-xl font-semibold mb-4">Add Money</h3>
         <div className="flex gap-3">
           <input
@@ -80,7 +83,7 @@ const Wallet = () => {
       </div>
 
       {/* Transaction History */}
-      <div className="bg-white shadow-md rounded-lg p-6">
+      <div className="border border-gray-300 shadow-md rounded-lg p-6">
         <h3 className="text-xl font-semibold mb-4">Transaction History</h3>
         {transactions.length === 0 ? (
           <p className="text-gray-500">No transactions yet.</p>
@@ -89,7 +92,7 @@ const Wallet = () => {
             {transactions.map((tx) => (
               <li
                 key={tx.id}
-                className="flex justify-between items-center border-b pb-2"
+                className="flex justify-between items-center border-b border-gray-400 pb-2"
               >
                 <div>
                   <p className="font-medium">{tx.reference}</p>

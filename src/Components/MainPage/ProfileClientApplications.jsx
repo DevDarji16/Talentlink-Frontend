@@ -47,7 +47,7 @@ const ProfileClientApplications = () => {
       {applications.map((app) => (
         <div
           key={app.id}
-          className="p-4 bg-white border rounded-lg shadow-sm hover:shadow-md transition"
+          className="p-4  border rounded-lg shadow-sm hover:shadow-md transition"
         >
           {/* Gig Info */}
           <div className="flex justify-between items-center mb-2">

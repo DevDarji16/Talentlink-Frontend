@@ -84,7 +84,7 @@ export default function CanvasList() {
           {canvases.map((canvas) => (
             <div
               key={canvas.id}
-              className="relative p-4 border rounded-lg flex justify-between items-start hover:bg-gray-50 transition"
+              className="relative p-4 border rounded-lg flex justify-between items-start  transition"
             >
               <div
                 onClick={() => navigate(`/canvas/${canvas.id}`)}
@@ -102,13 +102,13 @@ export default function CanvasList() {
                   onClick={() =>
                     setMenuOpenId(menuOpenId === canvas.id ? null : canvas.id)
                   }
-                  className="p-2 rounded hover:bg-gray-200"
+                  className="p-2 rounded hover:bg-gray-300"
                 >
                   <MoreVertical size={20} />
                 </button>
 
                 {menuOpenId === canvas.id && (
-                  <div className="absolute right-0 mt-2 w-32 bg-white border rounded shadow-md z-10">
+                  <div className="absolute right-0 mt-2 w-32 bg-white text-black  border rounded shadow-md z-10">
                     <button
                       onClick={() => {
                         setSelectedCanvas(canvas);
@@ -116,7 +116,7 @@ export default function CanvasList() {
                         setShowRenameModal(true);
                         setMenuOpenId(null);
                       }}
-                      className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                      className="block w-full text-left px-4 py-2 "
                     >
                       Rename
                     </button>
@@ -141,7 +141,7 @@ export default function CanvasList() {
       {/* Create Modal */}
       {showCreateModal && (
         <div className="fixed inset-0 backdrop-blur-sm bg-black/10 z-10 flex items-center justify-center p-4">
-          <div className="bg-white p-6 rounded-lg w-full max-w-md">
+          <div className="border border-gray-400 p-6 rounded-lg w-full max-w-md">
             <h2 className="text-xl font-bold mb-4">Create New Canvas</h2>
             <input
               type="text"
@@ -170,8 +170,8 @@ export default function CanvasList() {
 
       {/* Rename Modal */}
       {showRenameModal && (
-        <div className="fixed inset-0 backdrop-blur-sm bg-black/10 z-10 flex items-center justify-center p-4">
-          <div className="bg-white p-6 rounded-lg w-full max-w-md">
+        <div className="fixed  inset-0 backdrop-blur-sm bg-black/10 z-10 flex items-center justify-center p-4">
+          <div className="border border-gray-400 p-6 rounded-lg w-full max-w-md">
             <h2 className="text-xl font-bold mb-4">Rename Canvas</h2>
             <input
               type="text"
@@ -201,7 +201,7 @@ export default function CanvasList() {
       {/* Delete Modal */}
       {showDeleteModal && selectedCanvas && (
         <div className="fixed inset-0 backdrop-blur-sm bg-black/10 z-10 flex items-center justify-center p-4">
-          <div className="bg-white p-6 rounded-lg w-full max-w-md">
+          <div className="border border-gray-400 p-6 rounded-lg w-full max-w-md">
             <h2 className="text-xl font-bold mb-4">Delete Canvas</h2>
             <p className="mb-4 text-gray-700">
               Are you sure you want to delete{" "}

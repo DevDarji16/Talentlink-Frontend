@@ -1,17 +1,25 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { apiClient } from '../../apiClient';
 import { MdWork } from 'react-icons/md';
 import { FaGlobe } from 'react-icons/fa';
-import { UserData } from '../../App';
+import { Theme, ThemeSet, UserData } from '../../App';
 import HireModal from '../HireModal';
 // import EditGigModal from '../EditGigModal'; // create this
 
 import toast, { Toaster } from "react-hot-toast";
 import EditGigModal from '../EditGigModal';
+import GigReviews from './GigReviews';
+import ReviewAnalysisModal from './ReviewAnalysisModal';
 
 const GigPage = () => {
+  const navigate = useNavigate();
+  const theme=useContext(Theme)
+  const setTheme=useContext(ThemeSet)
+  const [reviews, setReviews] = useState([]);
   const userData = useContext(UserData);
+  const [isAnalysisModalOpen, setIsAnalysisModalOpen] = useState(false);
+
   const { id } = useParams();
   const [gig, setGig] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -20,6 +28,32 @@ const GigPage = () => {
   const [hasApplied, setHasApplied] = useState(false);
   const [applicationStatus, setApplicationStatus] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  const handleMessageClick = async () => {
+    try {
+      const res = await apiClient(
+        `http://localhost:8000/conversations/${gig.freelancer.id}/`,
+        "GET"
+      );
+
+      if (res) {
+        // navigate to /messages and pass conversation details via state
+        navigate("/messages", {
+          state: {
+            conversationId: res.id,
+            participant: {
+              id: gig.freelancer.id,
+              name: gig.freelancer.fullname,
+              profilepic: gig.freelancer.profilepic,
+            },
+          },
+        });
+      }
+    } catch (err) {
+      console.error("Error creating/fetching conversation:", err);
+      toast.error("Unable to start chat. Try again.");
+    }
+  };
 
 
   const handleHire = async (message) => {
@@ -110,7 +144,7 @@ const GigPage = () => {
             </button>
           ))}
         </div>
-        <div className="w-full h-96 bg-gray-100 rounded-lg overflow-hidden">
+        <div className="w-full h-96  rounded-lg overflow-hidden">
           <img
             src={gig.images[activeImage]}
             alt={gig.title}
@@ -263,9 +297,18 @@ const GigPage = () => {
                       )
                     )}
 
-                    <button className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition">
+                    <button
+                      onClick={handleMessageClick}
+                      className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition"
+                    >
                       Message
                     </button>
+                    <button
+  onClick={() => setIsAnalysisModalOpen(true)}
+  className="mt-4 w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-2 rounded-lg hover:opacity-90 transition"
+>
+  🔍 Analyze Reviews
+</button>
                   </>
                 ) : (
                   <div className="w-full mb-1 text-center py-2 rounded-lg bg-red-100 text-red-600 font-semibold">
@@ -279,6 +322,11 @@ const GigPage = () => {
 
         </div>
       </div>
+      <GigReviews
+        gigId={gig.id}
+        reviews={reviews}
+        setReviews={setReviews}
+      />
 
       <HireModal
         isOpen={isHireModalOpen}
@@ -293,6 +341,11 @@ const GigPage = () => {
         gig={gig}
 
         setGig={setGig}
+      />
+      <ReviewAnalysisModal
+        isOpen={isAnalysisModalOpen}
+        onClose={() => setIsAnalysisModalOpen(false)}
+        reviews={reviews}
       />
     </div>
   );

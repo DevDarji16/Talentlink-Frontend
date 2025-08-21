@@ -38,25 +38,25 @@ const ProfileFreelancerApplications = () => {
       {applications.map((app) => (
         <div 
           key={app.id} 
-          className="border rounded-lg p-4 shadow-sm bg-white space-y-2"
+          className="border rounded-lg p-4 shadow-sm  space-y-2"
         >
           {/* Job Info */}
           <div>
             <p className="font-medium text-lg">{app.job.title}</p>
-            <p className="text-sm text-gray-600">{app.job.category}</p>
+            <p className="text-sm ">{app.job.category}</p>
           </div>
 
           {/* Proposal */}
-          <p className="text-gray-800">{app.proposal_text}</p>
+          <p className="">{app.proposal_text}</p>
 
           {/* Price & Timeline */}
-          <div className="flex items-center justify-between text-sm text-gray-600">
+          <div className="flex items-center justify-between text-sm ">
             <span>💰 {app.proposed_price}</span>
             <span>⏳ {app.expected_timeline}</span>
           </div>
 
           {/* Client Info */}
-          <div className="flex items-center gap-2 text-sm text-gray-600">
+          <div className="flex items-center gap-2 text-sm ">
             <img 
               src={app.client.profilepic} 
               alt={app.client.username} 

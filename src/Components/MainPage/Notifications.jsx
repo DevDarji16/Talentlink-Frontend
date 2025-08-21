@@ -28,21 +28,20 @@ const Notifications = () => {
     console.log('N id', n_id)
     try {
       await apiClient(`http://localhost:8000/group/${inviteId}/respond`, "POST", {n_id,action} );
-      // Refresh notifications after responding
       fetchNotifications();
     } catch (err) {
       console.error("Failed to respond:", err);
     }
   };
 
-  if (loading) return <p>Loading notifications...</p>;
+  if (loading) return <p>Loading invites...</p>;
   if (error) return <p>{error}</p>;
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-4">Notifications</h2>
+    <div className="m-1">
+      <h2 className="text-2xl  font-bold mb-4">Group Invites</h2>
       {notifications.length === 0 ? (
-        <p>No notifications</p>
+        <p>No Invites</p>
       ) : (
         <ul className="space-y-4">
           {notifications.map((n) => (

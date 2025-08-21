@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
 import { apiClient } from "../apiClient";
-import { UserData } from "../App";
+import { Theme, ThemeSet, UserData } from "../App";
 import { Sparkles, Loader2, Users, X } from "lucide-react";
 
 const ApplicationModal = ({ isOpen, onClose, jobId, jobData, onSuccess }) => {
   const userData = useContext(UserData);
-
+  const theme = useContext(Theme)
   const [applyAs, setApplyAs] = useState("individual");
   const [selectedGroup, setSelectedGroup] = useState("");
   const [proposal, setProposal] = useState("");
@@ -56,18 +56,19 @@ const ApplicationModal = ({ isOpen, onClose, jobId, jobData, onSuccess }) => {
           {
             role: "system",
             content:
-              "You are an AI assistant helping freelancers write professional proposals.",
+              "You are an AI assistant helping freelancers write professional, concise proposals (under 150 words).",
           },
           {
             role: "user",
-            content: `Write a compelling proposal for job "${jobData.title}" in category "${jobData.category}". 
-            Description: ${jobData.description}. 
-            Client: ${jobData.client?.fullname || "Unknown Client"}. 
-            Budget: $${jobData.budget}.`,
+            content: `Write a short and compelling proposal (2–3 short paragraphs) for job "${jobData.title}" in category "${jobData.category}". 
+      Description: ${jobData.description}. 
+      Client: ${jobData.client?.fullname || "Unknown Client"}. 
+      Budget: $${jobData.budget}.`,
           },
         ],
         { model: "gpt-4o-mini" }
       );
+
 
       const reply =
         res.message?.content.replace(/[#*]{1,3}/g, "") ||
@@ -84,7 +85,7 @@ const ApplicationModal = ({ isOpen, onClose, jobId, jobData, onSuccess }) => {
 
   return (
     <div onClick={onClose} className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm z-50 px-3">
-      <div onClick={e=>e.stopPropagation()} className="bg-white rounded-2xl shadow-2xl sm:p-6 p-4 w-full max-w-2xl relative max-h-[90vh] overflow-y-auto">
+      <div onClick={e => e.stopPropagation()} className={`${theme === 'light' ? 'bg-white' : 'bg-black'} rounded-2xl shadow-2xl sm:p-6 p-4 w-full max-w-2xl relative max-h-[90vh] overflow-y-auto`}>
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -95,29 +96,29 @@ const ApplicationModal = ({ isOpen, onClose, jobId, jobData, onSuccess }) => {
 
         {/* Header */}
         <div className="mb-6">
-          <h2 className="sm:text-2xl text-xl font-bold text-gray-800 flex flex-wrap items-center gap-2">
+          <h2 className="sm:text-2xl text-xl font-bold  flex flex-wrap items-center gap-2">
             Apply for:{" "}
             <span className="text-indigo-600">{jobData?.title}</span>
           </h2>
           <p className="text-xs sm:text-sm text-gray-500 mt-1">
             {jobData?.category} • Budget:{" "}
-            <span className="font-medium text-gray-700">${jobData?.budget}</span>
+            <span className="font-medium ">${jobData?.budget}</span>
           </p>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* Apply As */}
-          <div>
+          <div className=" ">
             <label className="block font-medium mb-1 text-gray-700 text-sm sm:text-base">
               Apply As
             </label>
             <select
               value={applyAs}
               onChange={(e) => setApplyAs(e.target.value)}
-              className="w-full border px-3 py-2 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
+              className={`${theme === 'dark' ? 'text-white' : 'text-black'} w-full  border px-3 py-2 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base border border-gray-400`}
             >
-              <option value="individual">Individual</option>
+              <option value={`individual`} className={` ${theme === 'light' ? 'text-white' : 'text-black'}`}>Individual</option>
               {groups.length > 0 && <option value="group">Group</option>}
             </select>
           </div>
@@ -209,18 +210,17 @@ const ApplicationModal = ({ isOpen, onClose, jobId, jobData, onSuccess }) => {
             <button
               type="button"
               onClick={onClose}
-              className="px-5 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition text-sm sm:text-base"
+              className="px-5 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition text-sm sm:text-base"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className={`px-5 py-2 text-white rounded-lg shadow-md transition text-sm sm:text-base ${
-                loading
+              className={`px-5 py-2 text-white rounded-lg shadow-md transition text-sm sm:text-base ${loading
                   ? "bg-indigo-400 cursor-not-allowed"
                   : "bg-indigo-600 hover:bg-indigo-700"
-              }`}
+                }`}
             >
               {loading ? "Submitting..." : "Submit Application"}
             </button>

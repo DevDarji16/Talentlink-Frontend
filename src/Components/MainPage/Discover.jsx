@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { IoMdAdd } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import { UserData } from '../../App';
+import { Theme, ThemeSet, UserData } from '../../App';
 
 const Discover = () => {
   const userData=useContext(UserData)
   const [gigs, setGigs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const theme=useContext(Theme)
+  const setTheme=useContext(ThemeSet)
 
   useEffect(() => {
     const fetchGigs = async () => {
@@ -15,6 +17,7 @@ const Discover = () => {
       try {
         const res = await fetch('http://localhost:8000/gigs/');
         const data = await res.json();
+        console.log(data)
         setGigs(data);
       } catch (err) {
         console.error('Error fetching gigs:', err);
@@ -29,7 +32,7 @@ const Discover = () => {
   return (
     <div className="max-w-6xl mx-auto py-8 px-4 sm:px-6">
       <div className="flex justify-between items-center mb-8">
-        <h2 className="text-2xl font-bold text-gray-800">Discover Gigs</h2>
+        <h2 className="text-2xl font-bold ">Discover Gigs</h2>
         <div className="flex space-x-2">
           <div>
             {userData?.details?.role!=='client'?
@@ -57,7 +60,7 @@ const Discover = () => {
             <Link
               key={gig.id}
               to={`/gig/${gig.id}`}
-              className="flex-none w-full sm:w-78 bg-white border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-1"
+              className="flex-none w-full sm:w-78  border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-1"
             >
               <div className="relative pb-[56.25%]"> {/* 16:9 aspect ratio */}
                 <img
@@ -68,13 +71,13 @@ const Discover = () => {
               </div>
               <div className="p-4">
                 <div className="flex items-start justify-between">
-                  <h3 className="text-base font-semibold text-gray-800 line-clamp-2">{gig.title}</h3>
+                  <h3 className="text-base font-semibold  line-clamp-2">{gig.title}</h3>
                   <span className="ml-2 px-2 py-1 bg-indigo-50 text-indigo-600 text-xs rounded-full whitespace-nowrap">
                     ${gig.price}/hr
                   </span>
                 </div>
                 <p className="mt-1 text-xs text-gray-500 capitalize">{gig.category}</p>
-                <p className="mt-2 text-sm text-gray-600 line-clamp-2">{gig.description}</p>
+                <p className="mt-2 text-sm  line-clamp-2">{gig.description}</p>
                 <div className="flex flex-wrap gap-1 mt-3">
                   {gig.tags.slice(0, 3).map((tag, idx) => (
                     <span
