@@ -190,7 +190,6 @@ const Messages = ({ initialUser }) => {
 
   return (
     <div className="flex h-screen ">
-      {/* Conversations (sidebar) - Always visible on desktop, conditionally on mobile */}
       <div
         className={`${selectedUser ? "hidden lg:flex" : "flex"
           } w-full lg:w-[27%] flex-col border-r border-gray-200 h-full overflow-y-auto  p-4`}

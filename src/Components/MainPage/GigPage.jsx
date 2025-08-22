@@ -227,7 +227,7 @@ const GigPage = () => {
                 {/* Edit Button */}
                 <button
                   onClick={() => setIsEditModalOpen(true)}
-                  className="w-full bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600 transition"
+                  className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
                 >
                   ✏️ Edit Gig
                 </button>

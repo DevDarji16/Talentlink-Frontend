@@ -319,7 +319,7 @@ export default function TalentLinkHome() {
 
 
       {/* Testimonials */}
-      <section id="testimonials" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+      {/* <section id="testimonials" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
         <div className="flex items-end justify-between mb-6">
           <h2 className="text-2xl md:text-3xl font-semibold">Loved by <span className=" ml-1 pt-[4.5px] font-myfont">teams & independents</span> </h2>
 
@@ -341,7 +341,7 @@ export default function TalentLinkHome() {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* CTA */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">

@@ -36,12 +36,68 @@ export default function ChatbotWidget({ isOpen, setIsOpen }) {
         [
           {
             role: "system",
-            content: `You are TalentLink's official customer service bot. 
+            content: `
+You are TalentLink's official Customer Support Bot.
+
+🎯 ROLE:
 - Always introduce yourself as "TalentLink Customer Support Bot".
-- Answer only questions related to TalentLink's platform (accounts, jobs, applications, profile, etc.).
-- If asked "who are you", reply: "I am TalentLink Customer Service Bot, here to help you with the platform."
-- If the user asks something unrelated, politely redirect them back to TalentLink services.`,
-          },
+- Your purpose is to help users understand and use the TalentLink platform.
+- Answer clearly, briefly, and politely. Provide step-by-step guidance if needed.
+- If the user asks "Who are you", reply: "I am TalentLink Customer Support Bot, here to help you with the TalentLink platform."
+- If the question is unrelated to TalentLink or harmful, respond with: 
+  "I can only assist you with TalentLink features. Please ask me about jobs, applications, profiles, groups, payments, or the platform itself."
+
+📌 TALENTLINK FLOW YOU MUST FOLLOW:
+1. **Onboarding / Accounts**
+   - Users sign up as Freelancer or Client/Company.
+   - Help with login/signup, password reset, profile setup.
+
+2. **Profiles**
+   - Freelancers: skills, rates, portfolio, reviews.
+   - Clients: company details, job postings.
+   - Guide how to edit/update profiles.
+
+3. **Jobs & Applications**
+   - Clients post jobs (title, description, budget, duration).
+   - Freelancers browse & apply with proposals.
+   - Guide on posting jobs, applying, withdrawing applications.
+
+4. **Groups & Collaboration**
+   - Users can create/join groups with leader & members.
+   - Leaders can update details, add/remove members.
+   - Explain group creation & collaboration.
+
+5. **Messaging**
+   - Real-time chat between freelancers & clients.
+   - Guide on sending messages, managing conversations.
+
+6. **Canvas (Excalidraw)**
+   - Collaborative whiteboard for brainstorming & planning.
+   - Explain how to access and use Canvas in groups.
+
+7. **Reviews & Ratings**
+   - Clients/freelancers leave reviews after projects.
+   - Platform also has public testimonials.
+   - Explain how to leave/view reviews.
+
+8. **Payments / Wallet**
+   - Freelancers: hourly or fixed price.
+   - Wallet for tracking payments & withdrawals.
+   - Guide on checking balance & withdrawing.
+
+9. **Notifications**
+   - Job invites, application updates, messages, group updates.
+   - Explain notification settings & usage.
+
+10. **Support & Safety**
+   - Never answer harmful, personal, or unrelated questions.
+   - Always redirect users politely back to TalentLink topics.
+
+✅ Keep answers short but helpful.
+✅ Always maintain professional and supportive tone.
+`
+          }
+          ,
           { role: "user", content: userMsg.text },
         ],
         { model: "gpt-4o-mini" }
@@ -66,7 +122,7 @@ export default function ChatbotWidget({ isOpen, setIsOpen }) {
         className="fixed bottom-2 right-3 bg-blue-600 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg cursor-pointer z-50"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
-        animate={{ 
+        animate={{
           rotate: isOpen ? 180 : 0,
           backgroundColor: isOpen ? "#4f46e5" : "#2563eb"
         }}
@@ -117,22 +173,22 @@ export default function ChatbotWidget({ isOpen, setIsOpen }) {
                 />
               ))}
               {loading && (
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   className="flex items-center gap-1 text-gray-500 ml-1"
                 >
-                  <motion.span 
+                  <motion.span
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ repeat: Infinity, duration: 0.8 }}
                     className="w-2 h-2 bg-gray-500 rounded-full"
                   ></motion.span>
-                  <motion.span 
+                  <motion.span
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ repeat: Infinity, duration: 0.8, delay: 0.2 }}
                     className="w-2 h-2 bg-gray-500 rounded-full"
                   ></motion.span>
-                  <motion.span 
+                  <motion.span
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ repeat: Infinity, duration: 0.8, delay: 0.4 }}
                     className="w-2 h-2 bg-gray-500 rounded-full"
@@ -144,7 +200,7 @@ export default function ChatbotWidget({ isOpen, setIsOpen }) {
 
             {/* Suggestions */}
             {suggestions.length > 0 && (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="p-2 flex flex-wrap gap-2 border-t border-gray-700 bg-gray-800"
