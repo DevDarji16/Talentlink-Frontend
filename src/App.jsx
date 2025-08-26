@@ -56,8 +56,8 @@ const App = () => {
   useEffect(() => {
 
     const check_login = async () => {
-      // const data=await apiClient('https://talentlink-nloa.onrender.com/check_login/','GET')
-      const data = await apiClient('http://localhost:8000/check_login/', 'GET')
+      const data=await apiClient('https://talentlink-nloa.onrender.com/check_login/','GET')
+      // const data = await apiClient('http://localhost:8000/check_login/', 'GET')
       setIsLoggedIn(data.authenticated)
       setUserData(data)
       console.log('userdata', data)

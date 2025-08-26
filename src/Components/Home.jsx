@@ -1,5 +1,4 @@
 import {Link} from 'react-router-dom'
-import { apiClient } from '../apiClient'
 const Home = () => {
 
 

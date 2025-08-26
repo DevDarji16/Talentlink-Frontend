@@ -42,7 +42,8 @@ const Profile = () => {
 
   const handleUpdateField = async () => {
     try {
-      const res = await apiClient("http://localhost:8000/update_profile/", "PATCH", {
+      const res = await apiClient("https://talentlink-nloa.onrender.com/update_profile/", "PATCH", {
+      // const res = await apiClient("http://localhost:8000/update_profile/", "PATCH", {
         [editField]: editValue,
       })
 
@@ -56,7 +57,8 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const data = await apiClient("http://localhost:8000/get_profile/", "GET")
+        const data = await apiClient("https://talentlink-nloa.onrender.com/get_profile/", "GET")
+        // const data = await apiClient("http://localhost:8000/get_profile/", "GET")
         setProfile(data.userprofile)
         console.log("user profile ", data.userprofile)
       } catch (error) {
@@ -306,7 +308,8 @@ const Profile = () => {
                               className="text-sm text-red-600 hover:text-red-800 hover:underline transition-colors"
                               onClick={async () => {
                                 const newExp = profile.work_experience.filter((_, i) => i !== index)
-                                await apiClient("http://localhost:8000/update_profile/", "PATCH", {
+                                await apiClient("https://talentlink-nloa.onrender.com/update_profile/", "PATCH", {
+                                // await apiClient("http://localhost:8000/update_profile/", "PATCH", {
                                   work_experience: newExp,
                                 })
                                 setChange((prev) => !prev)
@@ -560,7 +563,8 @@ const Profile = () => {
                     updated.push(experienceData)
                   }
 
-                  await apiClient("http://localhost:8000/update_profile/", "PATCH", {
+                  await apiClient("https://talentlink-nloa.onrender.com/update_profile/", "PATCH", {
+                  // await apiClient("http://localhost:8000/update_profile/", "PATCH", {
                     work_experience: updated,
                   })
                   setExperienceModal(false)

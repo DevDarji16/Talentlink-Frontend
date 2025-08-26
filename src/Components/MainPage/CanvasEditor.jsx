@@ -15,7 +15,8 @@ export default function CanvasEditor() {
 useEffect(() => {
   const fetchCanvas = async () => {
     try {
-      const canvas = await apiClient(`http://localhost:8000/canvas/${canvasId}/`)
+      const canvas = await apiClient(`https://talentlink-nloa.onrender.com/canvas/${canvasId}/`)
+      // const canvas = await apiClient(`http://localhost:8000/canvas/${canvasId}/`)
       console.log("Canvas from API:", canvas)
 
       setTitle(canvas.title)
@@ -53,7 +54,8 @@ useEffect(() => {
       title: title
     }
     await apiClient(
-      `http://localhost:8000/canvas/${canvasId}/update/`,
+      // `http://localhost:8000/canvas/${canvasId}/update/`,
+      `https://talentlink-nloa.onrender.com/canvas/${canvasId}/update/`,
       'PUT',
       updateData
     )

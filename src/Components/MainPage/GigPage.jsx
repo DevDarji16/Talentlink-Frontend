@@ -32,7 +32,8 @@ const GigPage = () => {
   const handleMessageClick = async () => {
     try {
       const res = await apiClient(
-        `http://localhost:8000/conversations/${gig.freelancer.id}/`,
+        `https://talentlink-nloa.onrender.com/conversations/${gig.freelancer.id}/`,
+        // `http://localhost:8000/conversations/${gig.freelancer.id}/`,
         "GET"
       );
 
@@ -59,7 +60,8 @@ const GigPage = () => {
   const handleHire = async (message) => {
     try {
       const res = await apiClient(
-        `http://localhost:8000/gigs/${gig.id}/apply/`,
+        `https://talentlink-nloa.onrender.com/gigs/${gig.id}/apply/`,
+        // `http://localhost:8000/gigs/${gig.id}/apply/`,
         "POST",
         { message }
       );
@@ -82,14 +84,16 @@ const GigPage = () => {
       try {
         setLoading(true);
 
-        const data = await apiClient(`http://localhost:8000/gig/${id}`, "GET");
+        const data = await apiClient(`https://talentlink-nloa.onrender.com/gig/${id}`, "GET");
+        // const data = await apiClient(`http://localhost:8000/gig/${id}`, "GET");
         console.log('og', data.gig)
         setGig(data.gig);
 
         // fetch application status
         if (userData?.details?.role === "client") {
           const statusRes = await apiClient(
-            `http://localhost:8000/gigs/${id}/application-status/`,
+            `https://talentlink-nloa.onrender.com/gigs/${id}/application-status/`,
+            // `http://localhost:8000/gigs/${id}/application-status/`,
             "GET"
           );
           setApplicationStatus(statusRes); // { applied: true/false, status, application_id }
@@ -238,7 +242,8 @@ const GigPage = () => {
                     onClick={async () => {
                       try {
                         await apiClient(
-                          `http://localhost:8000/gigs/${gig.id}/disable/`,
+                          `https://talentlink-nloa.onrender.com/gigs/${gig.id}/disable/`,
+                          // `http://localhost:8000/gigs/${gig.id}/disable/`,
                           "POST"
                         );
                         toast.success("Gig disabled successfully");
@@ -258,7 +263,8 @@ const GigPage = () => {
                     onClick={async () => {
                       try {
                         await apiClient(
-                          `http://localhost:8000/gigs/${gig.id}/enable/`,
+                          `https://talentlink-nloa.onrender.com/gigs/${gig.id}/enable/`,
+                          // `http://localhost:8000/gigs/${gig.id}/enable/`,
                           "POST"
                         );
                         toast.success("Gig enabled successfully");

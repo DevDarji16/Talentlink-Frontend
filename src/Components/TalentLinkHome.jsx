@@ -318,30 +318,6 @@ export default function TalentLinkHome() {
       </section>
 
 
-      {/* Testimonials */}
-      {/* <section id="testimonials" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
-        <div className="flex items-end justify-between mb-6">
-          <h2 className="text-2xl md:text-3xl font-semibold">Loved by <span className=" ml-1 pt-[4.5px] font-myfont">teams & independents</span> </h2>
-
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {testimonials.map((t, idx) => (
-            <div
-              key={idx}
-              className={`rounded-2xl border p-6 transition-all duration-300 transform hover:scale-105 ${theme === "dark"
-                ? "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/10"
-                : "border-neutral-200 bg-white hover:border-neutral-300 hover:shadow-md"
-                }`}
-            >
-              <p className={theme === "dark" ? "text-neutral-200" : "text-neutral-700"}>"{t.quote}"</p>
-              <div className={`mt-4 text-sm ${theme === "dark" ? "text-neutral-400" : "text-neutral-500"
-                }`}>
-                — {t.name}, {t.title}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section> */}
 
       {/* CTA */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">

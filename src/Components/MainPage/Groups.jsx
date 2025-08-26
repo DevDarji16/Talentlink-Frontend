@@ -9,7 +9,8 @@ const Groups = () => {
   useEffect(() => {
     const fetchGroups = async () => {
       try {
-        const data = await apiClient("http://localhost:8000/groups/", "GET");
+        const data = await apiClient("https://talentlink-nloa.onrender.com/groups/", "GET");
+        // const data = await apiClient("http://localhost:8000/groups/", "GET");
         setGroups(data.groups || []);
       } catch (err) {
         console.error("Error fetching groups:", err);

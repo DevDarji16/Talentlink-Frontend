@@ -10,7 +10,8 @@ const FeaturedJobs = ({ theme }) => {
     useEffect(() => {
         const fetchJobs = async () => {
             try {
-                const data = await apiClient("http://localhost:8000/jobs/", "GET");
+                // const data = await apiClient("http://localhost:8000/jobs/", "GET");
+                const data = await apiClient("https://talentlink-nloa.onrender.com/jobs/", "GET");
                 setJobs(data);
                 console.log(data)
             } catch (err) {

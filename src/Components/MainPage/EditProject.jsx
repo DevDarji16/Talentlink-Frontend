@@ -21,7 +21,8 @@ const EditProject = () => {
 
   useEffect(() => {
     const getProject = async () => {
-      const data = await apiClient('http://localhost:8000/get_profile/', 'GET');
+      const data = await apiClient('https://talentlink-nloa.onrender.com/get_profile/', 'GET');
+      // const data = await apiClient('http://localhost:8000/get_profile/', 'GET');
       const p = data.userprofile.projects[parseInt(id)];
       setProject(p);
       setTitle(p.title);
@@ -66,7 +67,8 @@ const EditProject = () => {
         skills
       };
 
-      const data = await apiClient('http://localhost:8000/edit_project/', 'PATCH', {
+      // const data = await apiClient('http://localhost:8000/edit_project/', 'PATCH', {
+      const data = await apiClient('https://talentlink-nloa.onrender.com/edit_project/', 'PATCH', {
         index: parseInt(id),
         project: updatedProject
       });
@@ -84,7 +86,8 @@ const EditProject = () => {
 
   const handleDelete = async () => {
     if (window.confirm("Are you sure you want to delete this project?")) {
-      await apiClient('http://localhost:8000/delete_project/', 'DELETE', {
+      // await apiClient('http://localhost:8000/delete_project/', 'DELETE', {
+      await apiClient('https://talentlink-nloa.onrender.com/delete_project/', 'DELETE', {
         index: parseInt(id)
       });
       alert("Deleted successfully");

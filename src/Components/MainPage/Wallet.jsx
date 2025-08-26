@@ -14,7 +14,8 @@ const Wallet = () => {
   // Fetch wallet details
   const fetchWallet = async () => {
     try {
-      const res = await apiClient("http://localhost:8000/wallet/details/", "GET");
+      const res = await apiClient("https://talentlink-nloa.onrender.com/wallet/details/", "GET");
+      // const res = await apiClient("http://localhost:8000/wallet/details/", "GET");
       setBalance(res.balance);
       setTransactions(res.transactions);
     } catch (err) {
@@ -32,7 +33,8 @@ const Wallet = () => {
       return;
     }
     try {
-      const res = await apiClient("http://localhost:8000/wallet/add/", "POST", {
+      const res = await apiClient("https://talentlink-nloa.onrender.com/wallet/add/", "POST", {
+      // const res = await apiClient("http://localhost:8000/wallet/add/", "POST", {
         amount: parseFloat(amount),
       });
       console.log(res)

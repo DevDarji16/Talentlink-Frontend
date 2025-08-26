@@ -13,7 +13,8 @@ const Notifications = () => {
 
   const fetchNotifications = async () => {
     try {
-      const data = await apiClient("http://localhost:8000/notifications/", "GET");
+      const data = await apiClient("https://talentlink-nloa.onrender.com/notifications/", "GET");
+      // const data = await apiClient("http://localhost:8000/notifications/", "GET");
       setNotifications(data);
       console.log(data)
     } catch (err) {
@@ -27,7 +28,8 @@ const Notifications = () => {
     console.log('Invite id', inviteId)
     console.log('N id', n_id)
     try {
-      await apiClient(`http://localhost:8000/group/${inviteId}/respond`, "POST", {n_id,action} );
+      await apiClient(`https://talentlink-nloa.onrender.com/group/${inviteId}/respond`, "POST", {n_id,action} );
+      // await apiClient(`http://localhost:8000/group/${inviteId}/respond`, "POST", {n_id,action} );
       fetchNotifications();
     } catch (err) {
       console.error("Failed to respond:", err);

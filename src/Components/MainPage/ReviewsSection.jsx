@@ -8,7 +8,8 @@ const ReviewsSection = ({ userId }) => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const res = await apiClient(`http://localhost:8000/reviews/${userId}/`, "GET");
+        const res = await apiClient(`https://talentlink-nloa.onrender.com/reviews/${userId}/`, "GET");
+        // const res = await apiClient(`http://localhost:8000/reviews/${userId}/`, "GET");
         setReviewsData(res);
       } catch (err) {
         console.error("Failed to fetch reviews", err);

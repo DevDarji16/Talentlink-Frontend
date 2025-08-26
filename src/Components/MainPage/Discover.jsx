@@ -15,7 +15,8 @@ const Discover = () => {
     const fetchGigs = async () => {
 
       try {
-        const res = await fetch('http://localhost:8000/gigs/');
+        // const res = await fetch('http://localhost:8000/gigs/');
+        const res = await fetch('https://talentlink-nloa.onrender.com/gigs/');
         const data = await res.json();
         console.log(data)
         setGigs(data);

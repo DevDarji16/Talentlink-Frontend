@@ -11,7 +11,8 @@ const ProfileClientApplications = () => {
     const fetchApplications = async () => {
       try {
         const res = await apiClient(
-          "http://localhost:8000/applications/client/",
+          "https://talentlink-nloa.onrender.com/applications/client/",
+          // "http://localhost:8000/applications/client/",
           "GET"
         );
         console.log("Client Applications:", res);

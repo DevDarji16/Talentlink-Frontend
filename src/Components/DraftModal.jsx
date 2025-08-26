@@ -19,7 +19,8 @@ const DraftModal = ({ isOpen, onClose, userData }) => {
     if (value.length < 2 || selectedClient) return; // stop if already selected
     try {
       const res = await apiClient(
-        `http://localhost:8000/drafts/search-clients/?username=${value}`,
+        // `http://localhost:8000/drafts/search-clients/?username=${value}`,
+        `https://talentlink-nloa.onrender.com/drafts/search-clients/?username=${value}`,
         "GET"
       );
       setClients(res.results || []);
@@ -36,7 +37,8 @@ const DraftModal = ({ isOpen, onClose, userData }) => {
     }
 
     try {
-      await apiClient("http://localhost:8000/drafts/create/", "POST", {
+      // await apiClient("http://localhost:8000/drafts/create/", "POST", {
+      await apiClient("https://talentlink-nloa.onrender.com/drafts/create/", "POST", {
         client_id: selectedClient.id,
         group_id: groupId !== "individual" ? groupId : null,
         title,

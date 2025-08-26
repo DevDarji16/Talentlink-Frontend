@@ -10,10 +10,16 @@ const ProfileOngoingJobs = ({ role }) => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
+        // const url =
+        //   role === "client"
+        //     ? "http://localhost:8000/jobstatus/client/ongoing/"
+        //     : "http://localhost:8000/jobstatus/freelancer/ongoing/";
+
         const url =
           role === "client"
-            ? "http://localhost:8000/jobstatus/client/ongoing/"
-            : "http://localhost:8000/jobstatus/freelancer/ongoing/";
+            ? "https://talentlink-nloa.onrender.com/jobstatus/client/ongoing/"
+            : "https://talentlink-nloa.onrender.com/jobstatus/freelancer/ongoing/";
+
 
         const res = await apiClient(url, "GET");
         console.log("ongoing", res);

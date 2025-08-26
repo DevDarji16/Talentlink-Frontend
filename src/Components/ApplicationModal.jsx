@@ -31,7 +31,8 @@ const ApplicationModal = ({ isOpen, onClose, jobId, jobData, onSuccess }) => {
       };
 
       await apiClient(
-        `http://localhost:8000/jobapplication/apply/${jobId}/`,
+        // `http://localhost:8000/jobapplication/apply/${jobId}/`,
+        `https://talentlink-nloa.onrender.com/jobapplication/apply/${jobId}/`,
         "POST",
         payload
       );

@@ -19,7 +19,8 @@ export default function CanvasList() {
   // Fetch canvases
   useEffect(() => {
     const fetchCanvases = async () => {
-      const data = await apiClient("http://localhost:8000/canvases/");
+      // const data = await apiClient("http://localhost:8000/canvases/");
+      const data = await apiClient("https://talentlink-nloa.onrender.com/canvases/");
       setCanvases(data.canvases);
     };
     fetchCanvases();
@@ -29,7 +30,8 @@ export default function CanvasList() {
   const createCanvas = async () => {
     const canvasData = { title: newTitle };
     const data = await apiClient(
-      "http://localhost:8000/canvas/create/",
+      // "http://localhost:8000/canvas/create/",
+      "https://talentlink-nloa.onrender.com/canvas/create/",
       "POST",
       canvasData
     );
@@ -42,7 +44,8 @@ export default function CanvasList() {
   const renameCanvas = async () => {
     if (!selectedCanvas) return;
     await apiClient(
-      `http://localhost:8000/canvas/${selectedCanvas.id}/update/`,
+      // `http://localhost:8000/canvas/${selectedCanvas.id}/update/`,
+      `https://talentlink-nloa.onrender.com/canvas/${selectedCanvas.id}/update/`,
       "PUT",
       { title: renameTitle }
     );
@@ -60,7 +63,8 @@ export default function CanvasList() {
   const deleteCanvas = async () => {
     if (!selectedCanvas) return;
     await apiClient(
-      `http://localhost:8000/canvas/${selectedCanvas.id}/delete/`,
+      // `http://localhost:8000/canvas/${selectedCanvas.id}/delete/`,
+      `https://talentlink-nloa.onrender.com/canvas/${selectedCanvas.id}/delete/`,
       "DELETE"
     );
     setCanvases((prev) => prev.filter((c) => c.id !== selectedCanvas.id));

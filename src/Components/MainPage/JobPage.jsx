@@ -23,14 +23,16 @@ const JobPage = () => {
         setLoading(true);
 
         // Fetch job details
-        const data = await apiClient(`http://localhost:8000/job/${id}`, "GET");
+        const data = await apiClient(`https://talentlink-nloa.onrender.com/job/${id}`, "GET");
+        // const data = await apiClient(`http://localhost:8000/job/${id}`, "GET");
         console.log('AI data',data)
         setJob(data.job);
 
         // Fetch application status (only if freelancer)
         if (userData?.details?.role === "freelancer") {
           const statusRes = await apiClient(
-            `http://localhost:8000/jobapplication/status/${id}/`,
+            `https://talentlink-nloa.onrender.com/jobapplication/status/${id}/`,
+            // `http://localhost:8000/jobapplication/status/${id}/`,
             "GET"
           );
           setStatus(statusRes.status);
@@ -183,7 +185,8 @@ const JobPage = () => {
         onSuccess={async () => {
           // re-fetch status after applying
           const statusRes = await apiClient(
-            `http://localhost:8000/jobapplication/status/${job.id}/`,
+            `https://talentlink-nloa.onrender.com/jobapplication/status/${job.id}/`,
+            // `http://localhost:8000/jobapplication/status/${job.id}/`,
             "GET"
           );
           setStatus(statusRes.status);

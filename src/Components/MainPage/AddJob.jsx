@@ -29,7 +29,8 @@ const AddJob = () => {
         budget,
       };
 
-      const data = await apiClient('http://localhost:8000/jobs/', 'POST', jobData);
+      // const data = await apiClient('http://localhost:8000/jobs/', 'POST', jobData);
+      const data = await apiClient('https://talentlink-nloa.onrender.com/jobs/', 'POST', jobData);
 
       if (data.id) {
         navigate('/profile');

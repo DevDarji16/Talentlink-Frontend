@@ -8,7 +8,8 @@ const ClientApprovals = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await apiClient("http://localhost:8000/jobstatus/client/submitted/", "GET");
+      // const res = await apiClient("http://localhost:8000/jobstatus/client/submitted/", "GET");
+      const res = await apiClient("https://talentlink-nloa.onrender.com/jobstatus/client/submitted/", "GET");
       setJobs(res || []);
     };
     fetchData();

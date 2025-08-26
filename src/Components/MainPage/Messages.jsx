@@ -26,7 +26,8 @@ const Messages = ({ initialUser }) => {
     async function fetchConversations() {
       try {
         const res = await apiClient(
-          "http://localhost:8000/messages/get_conversations/",
+          "https://talentlink-nloa.onrender.com/messages/get_conversations/",
+          // "http://localhost:8000/messages/get_conversations/",
           "GET"
         );
         console.log(res)
@@ -45,7 +46,8 @@ const Messages = ({ initialUser }) => {
     async function fetchMessages() {
       try {
         const res = await apiClient(
-          `http://localhost:8000/messages/${selectedUser.conversationId}/`,
+          `https://talentlink-nloa.onrender.com/messages/${selectedUser.conversationId}/`,
+          // `http://localhost:8000/messages/${selectedUser.conversationId}/`,
           "GET"
         );
 
@@ -157,7 +159,8 @@ const Messages = ({ initialUser }) => {
       } else {
         // Fallback to API if WebSocket is not available
         const response = await apiClient(
-          `http://localhost:8000/messages/${selectedUser.conversationId}/`,
+          // `http://localhost:8000/messages/${selectedUser.conversationId}/`,
+          `https://talentlink-nloa.onrender.com/messages/${selectedUser.conversationId}/`,
           "POST",
           messageData
         );

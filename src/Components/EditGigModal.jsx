@@ -12,7 +12,8 @@ const EditGigModal = ({ isOpen, onClose, gig, setGig }) => {
   const handleSave = async () => {
     try {
       const res = await apiClient(
-        `http://localhost:8000/gigs/${gig.id}/edit/`,
+        // `http://localhost:8000/gigs/${gig.id}/edit/`,
+        `https://talentlink-nloa.onrender.com/gigs/${gig.id}/edit/`,
         "POST",
         { title, description, price }
       );
