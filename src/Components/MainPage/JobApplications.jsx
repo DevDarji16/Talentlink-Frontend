@@ -15,7 +15,7 @@ const JobApplications = ({ userData }) => {
   const fetchApplications = async () => {
     try {
       const res = await apiClient(
-        "https://talentlink-nloa.onrender.com/jobapplication/pending/",
+        "/jobapplication/pending/",
         // "http://localhost:8000/jobapplication/pending/",
         "GET"
       );
@@ -50,7 +50,7 @@ const JobApplications = ({ userData }) => {
     try {
       await apiClient(
         // `http://localhost:8000/applications/${selectedApp.id}/respond/`,
-        `https://talentlink-nloa.onrender.com/applications/${selectedApp.id}/respond/`,
+        `/applications/${selectedApp.id}/respond/`,
         "POST",
         { action: "accept" }
       );
@@ -68,7 +68,7 @@ const JobApplications = ({ userData }) => {
     try {
       await apiClient(
         // `http://localhost:8000/applications/${appId}/respond/`,
-        `https://talentlink-nloa.onrender.com/applications/${appId}/respond/`,
+        `/applications/${appId}/respond/`,
         "POST",
         { action: "reject" }
       );

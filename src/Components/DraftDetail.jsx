@@ -16,7 +16,7 @@ const DraftDetail = () => {
   const fetchDraft = async () => {
     try {
       // const res = await apiClient(`http://localhost:8000/drafts/${id}/`, "GET");
-      const res = await apiClient(`https://talentlink-nloa.onrender.com/drafts/${id}/`, "GET");
+      const res = await apiClient(`/drafts/${id}/`, "GET");
       setDraft(res.draft);
     } catch (err) {
       console.error("Error fetching draft:", err);
@@ -39,7 +39,7 @@ const DraftDetail = () => {
       setIsAccepting(true);
       const res = await apiClient(
         // `http://localhost:8000/drafts/${draft.id}/respond/`,
-        `https://talentlink-nloa.onrender.com/drafts/${draft.id}/respond/`,
+        `/drafts/${draft.id}/respond/`,
         "POST",
         { action }
       );

@@ -17,8 +17,8 @@ const ProfileOngoingJobs = ({ role }) => {
 
         const url =
           role === "client"
-            ? "https://talentlink-nloa.onrender.com/jobstatus/client/ongoing/"
-            : "https://talentlink-nloa.onrender.com/jobstatus/freelancer/ongoing/";
+            ? "/jobstatus/client/ongoing/"
+            : "/jobstatus/freelancer/ongoing/";
 
 
         const res = await apiClient(url, "GET");

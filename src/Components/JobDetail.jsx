@@ -29,7 +29,7 @@ const JobDetail = () => {
   const fetchJob = async () => {
     try {
       // const res = await apiClient(`http://localhost:8000/jobstatus/${id}/`, "GET");
-      const res = await apiClient(`https://talentlink-nloa.onrender.com/jobstatus/${id}/`, "GET");
+      const res = await apiClient(`/jobstatus/${id}/`, "GET");
       setJob(res);
     } catch (err) {
       console.error(err);
@@ -43,7 +43,7 @@ const JobDetail = () => {
     try {
       const res = await apiClient(
         // `http://localhost:8000/reviews/job/${id}/mine/`,
-        `https://talentlink-nloa.onrender.com/reviews/job/${id}/mine/`,
+        `/reviews/job/${id}/mine/`,
         "GET"
       );
       if (res && res.id) {
@@ -108,7 +108,7 @@ const JobDetail = () => {
     try {
       const res = await apiClient(
         // `http://localhost:8000/job/${job.id}/submit/`,
-        `https://talentlink-nloa.onrender.com/job/${job.id}/submit/`,
+        `/job/${job.id}/submit/`,
         "POST",
         { file_url: fileUrl || null, message }
       );
@@ -125,7 +125,7 @@ const JobDetail = () => {
     try {
       const res = await apiClient(
         // `http://localhost:8000/jobstatus/${job.id}/respond/`,
-        `https://talentlink-nloa.onrender.com/jobstatus/${job.id}/respond/`,
+        `/jobstatus/${job.id}/respond/`,
         "POST",
         { action }
       );
@@ -146,7 +146,7 @@ const JobDetail = () => {
     try {
       const res = await apiClient(
         // `http://localhost:8000/jobstatus/${job.id}/reviews/`,
-        `https://talentlink-nloa.onrender.com/jobstatus/${job.id}/reviews/`,
+        `/jobstatus/${job.id}/reviews/`,
         "POST",
         { rating, comment: reviewComment }
       );

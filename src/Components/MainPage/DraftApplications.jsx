@@ -13,7 +13,7 @@ const DraftApplications = () => {
   const fetchDrafts = async () => {
     try {
       // const res = await apiClient("http://localhost:8000/drafts/for-me/", "GET");
-      const res = await apiClient("https://talentlink-nloa.onrender.com/drafts/for-me/", "GET");
+      const res = await apiClient("/drafts/for-me/", "GET");
       setDrafts(res.drafts || []);
     } catch (err) {
       toast.error("Failed to load drafts");
@@ -30,7 +30,7 @@ const DraftApplications = () => {
     try {
       const res = await apiClient(
         // `http://localhost:8000/drafts/${draftId}/respond/`,
-        `https://talentlink-nloa.onrender.com/drafts/${draftId}/respond/`,
+        `/drafts/${draftId}/respond/`,
         "POST",
         { action }
       );

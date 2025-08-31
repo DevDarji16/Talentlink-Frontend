@@ -13,7 +13,7 @@ const EditGigModal = ({ isOpen, onClose, gig, setGig }) => {
     try {
       const res = await apiClient(
         // `http://localhost:8000/gigs/${gig.id}/edit/`,
-        `https://talentlink-nloa.onrender.com/gigs/${gig.id}/edit/`,
+        `/gigs/${gig.id}/edit/`,
         "POST",
         { title, description, price }
       );

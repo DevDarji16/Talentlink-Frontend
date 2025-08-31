@@ -83,7 +83,7 @@ const GetDetails = () => {
 
   const handleCheckUsername = async (username) => {
     if (username.length === 10) {
-      const data = await apiClient('https://talentlink-nloa.onrender.com/check_username/', 'POST', { username });
+      const data = await apiClient('/check_username/', 'POST', { username });
       // const data = await apiClient("http://localhost:8000/check_username/", "POST", { username })
       setUsernameAvailibility(data.available)
     } else {
@@ -115,7 +115,7 @@ const GetDetails = () => {
     const finalData = { ...formData, profilepic: uploadedPhotoUrl }
     console.log(finalData)
 
-    const data = await apiClient('https://talentlink-nloa.onrender.com/create_profile/', 'POST', finalData );
+    const data = await apiClient('/create_profile/', 'POST', finalData );
     // const data = await apiClient("http://localhost:8000/create_profile/", "POST", finalData)
     console.log("backend", data)
     if (data.id) {

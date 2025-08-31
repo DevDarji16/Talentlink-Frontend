@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Star } from "lucide-react";
 import { UserData } from "../App";
 import { Link } from "react-router-dom";
+import { apiClient } from "../apiClient";
 
 export default function FeaturedFreelancers({ theme }) {
     const [featured, setFeatured] = useState([]);
@@ -10,9 +11,10 @@ export default function FeaturedFreelancers({ theme }) {
     useEffect(() => {
         const fetchGigs = async () => {
             try {
-                const res = await fetch("https://talentlink-nloa.onrender.com/gigs/");
+                // const res = await fetch("https://talentlink-nloa.onrender.com/gigs/");
                 // const res = await fetch("http://localhost:8000/gigs/");
-                const data = await res.json();
+                const data = await apiClient("/gigs/", "GET");
+                // const data = await res.json();
                 // console.log(data)
                 setFeatured(data); // directly set gigs as featured
             } catch (err) {

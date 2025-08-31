@@ -47,10 +47,10 @@ const GroupDetailed = () => {
   const saveGroupEdits = async () => {
     try {
       // await apiClient(`http://localhost:8000/group/${id}/update/`, "PATCH", editData)
-      await apiClient(`https://talentlink-nloa.onrender.com/group/${id}/update/`, "PATCH", editData)
+      await apiClient(`/group/${id}/update/`, "PATCH", editData)
 
       // Refetch updated group
-      const updatedGroup = await apiClient(`https://talentlink-nloa.onrender.com/group/${id}/`, "GET")
+      const updatedGroup = await apiClient(`/group/${id}/`, "GET")
       // const updatedGroup = await apiClient(`http://localhost:8000/group/${id}/`, "GET")
       setGroup(updatedGroup)
     } catch (err) {
@@ -66,7 +66,7 @@ const GroupDetailed = () => {
   useEffect(() => {
     const fetchGroup = async () => {
       try {
-        const data = await apiClient(`https://talentlink-nloa.onrender.com/group/${id}/`, "GET")
+        const data = await apiClient(`/group/${id}/`, "GET")
         // const data = await apiClient(`http://localhost:8000/group/${id}/`, "GET")
         setGroup(data)
       } catch (err) {
@@ -86,7 +86,7 @@ const GroupDetailed = () => {
     }
     setSearchLoading(true)
     try {
-      const data = await apiClient(`https://talentlink-nloa.onrender.com/search/?q=${value}`, "GET")
+      const data = await apiClient(`/search/?q=${value}`, "GET")
       // const data = await apiClient(`http://localhost:8000/search/?q=${value}`, "GET")
       setSearchResults(data.results || [])
     } catch (error) {
@@ -326,7 +326,7 @@ const GroupDetailed = () => {
                 <button
                   onClick={async () => {
                     try {
-                      await apiClient(`https://talentlink-nloa.onrender.com/group/${id}/invite`, "POST", {
+                      await apiClient(`/group/${id}/invite`, "POST", {
                       // await apiClient(`http://localhost:8000/group/${id}/invite`, "POST", {
                         receiver_id: confirmInvite.user.id,
                       })
@@ -365,7 +365,7 @@ const GroupDetailed = () => {
                 <button
                   onClick={async () => {
                     try {
-                      const res = await apiClient(`https://talentlink-nloa.onrender.com/group/${id}/remove_member/`, "POST", {
+                      const res = await apiClient(`/group/${id}/remove_member/`, "POST", {
                       // const res = await apiClient(`http://localhost:8000/group/${id}/remove_member/`, "POST", {
                         member_id: memberToRemove.id,
                       })

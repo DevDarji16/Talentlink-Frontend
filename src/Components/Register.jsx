@@ -19,8 +19,8 @@ const Register = () => {
 
   const handleSignUp = () => {
     localStorage.setItem("selected_role", role);
-    window.location.href = "https://talentlink-nloa.onrender.com/auth/accounts/google/login";
-    // window.location.href = "http://localhost:8000/auth/accounts/google/login";
+    // window.location.href = "https://talentlink-nloa.onrender.com/auth/accounts/google/login";
+    window.location.href = "http://localhost:8000/auth/accounts/google/login";
   };
 
   // Hover direction effect

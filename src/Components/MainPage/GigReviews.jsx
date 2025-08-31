@@ -13,7 +13,7 @@ const GigReviews = ({ gigId,reviews,setReviews }) => {
     const fetchReviews = async () => {
       try {
         const res = await apiClient(
-          `https://talentlink-nloa.onrender.com/reviews/gig/${gigId}/`,
+          `/reviews/gig/${gigId}/`,
           // `http://localhost:8000/reviews/gig/${gigId}/`,
           "GET"
         );

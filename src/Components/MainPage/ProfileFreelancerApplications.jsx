@@ -9,7 +9,7 @@ const ProfileFreelancerApplications = () => {
     const fetchApplications = async () => {
       try {
         const res = await apiClient(
-          'https://talentlink-nloa.onrender.com/jobapplication/freelancer/pending/',
+          '/jobapplication/freelancer/pending/',
           // 'http://localhost:8000/jobapplication/freelancer/pending/',
           'GET'
         );

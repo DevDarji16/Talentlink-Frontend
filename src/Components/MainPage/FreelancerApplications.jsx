@@ -11,7 +11,7 @@ const FreelancerApplications = () => {
   // Fetch applications for freelancer
   const fetchApplications = async () => {
     try {
-      const res = await apiClient("https://talentlink-nloa.onrender.com/applications/freelancer/", "GET");
+      const res = await apiClient("/applications/freelancer/", "GET");
       // const res = await apiClient("http://localhost:8000/applications/freelancer/", "GET");
       console.log("Freelancer Applications:", res);
       setApplications(res || []);
@@ -30,7 +30,7 @@ const FreelancerApplications = () => {
 const handleResponse = async (id, action) => {
   try {
     await apiClient(
-      `https://talentlink-nloa.onrender.com/gigapplications/${id}/respond/`,
+      `/gigapplications/${id}/respond/`,
       // `http://localhost:8000/gigapplications/${id}/respond/`,
       "POST",
       { action }, // body

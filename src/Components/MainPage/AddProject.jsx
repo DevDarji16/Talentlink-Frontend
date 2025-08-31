@@ -42,7 +42,7 @@ const AddProject = () => {
             const imageUrl = res.data.data.url;
 
             // const data = await apiClient('http://localhost:8000/add_project/', 'POST', {
-            const data = await apiClient('https://talentlink-nloa.onrender.com/add_project/', 'POST', {
+            const data = await apiClient('/add_project/', 'POST', {
                 title,
                 description,
                 link: projectLink,

@@ -20,7 +20,7 @@ export default function CanvasList() {
   useEffect(() => {
     const fetchCanvases = async () => {
       // const data = await apiClient("http://localhost:8000/canvases/");
-      const data = await apiClient("https://talentlink-nloa.onrender.com/canvases/");
+      const data = await apiClient("/canvases/");
       setCanvases(data.canvases);
     };
     fetchCanvases();
@@ -31,7 +31,7 @@ export default function CanvasList() {
     const canvasData = { title: newTitle };
     const data = await apiClient(
       // "http://localhost:8000/canvas/create/",
-      "https://talentlink-nloa.onrender.com/canvas/create/",
+      "/canvas/create/",
       "POST",
       canvasData
     );
@@ -45,7 +45,7 @@ export default function CanvasList() {
     if (!selectedCanvas) return;
     await apiClient(
       // `http://localhost:8000/canvas/${selectedCanvas.id}/update/`,
-      `https://talentlink-nloa.onrender.com/canvas/${selectedCanvas.id}/update/`,
+      `/canvas/${selectedCanvas.id}/update/`,
       "PUT",
       { title: renameTitle }
     );
@@ -64,7 +64,7 @@ export default function CanvasList() {
     if (!selectedCanvas) return;
     await apiClient(
       // `http://localhost:8000/canvas/${selectedCanvas.id}/delete/`,
-      `https://talentlink-nloa.onrender.com/canvas/${selectedCanvas.id}/delete/`,
+      `/canvas/${selectedCanvas.id}/delete/`,
       "DELETE"
     );
     setCanvases((prev) => prev.filter((c) => c.id !== selectedCanvas.id));

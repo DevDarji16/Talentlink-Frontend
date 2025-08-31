@@ -32,7 +32,7 @@ const GigPage = () => {
   const handleMessageClick = async () => {
     try {
       const res = await apiClient(
-        `https://talentlink-nloa.onrender.com/conversations/${gig.freelancer.id}/`,
+        `/conversations/${gig.freelancer.id}/`,
         // `http://localhost:8000/conversations/${gig.freelancer.id}/`,
         "GET"
       );
@@ -60,7 +60,7 @@ const GigPage = () => {
   const handleHire = async (message) => {
     try {
       const res = await apiClient(
-        `https://talentlink-nloa.onrender.com/gigs/${gig.id}/apply/`,
+        `/gigs/${gig.id}/apply/`,
         // `http://localhost:8000/gigs/${gig.id}/apply/`,
         "POST",
         { message }
@@ -84,7 +84,7 @@ const GigPage = () => {
       try {
         setLoading(true);
 
-        const data = await apiClient(`https://talentlink-nloa.onrender.com/gig/${id}`, "GET");
+        const data = await apiClient(`/gig/${id}`, "GET");
         // const data = await apiClient(`http://localhost:8000/gig/${id}`, "GET");
         console.log('og', data.gig)
         setGig(data.gig);
@@ -92,7 +92,7 @@ const GigPage = () => {
         // fetch application status
         if (userData?.details?.role === "client") {
           const statusRes = await apiClient(
-            `https://talentlink-nloa.onrender.com/gigs/${id}/application-status/`,
+            `/gigs/${id}/application-status/`,
             // `http://localhost:8000/gigs/${id}/application-status/`,
             "GET"
           );
@@ -242,7 +242,7 @@ const GigPage = () => {
                     onClick={async () => {
                       try {
                         await apiClient(
-                          `https://talentlink-nloa.onrender.com/gigs/${gig.id}/disable/`,
+                          `/gigs/${gig.id}/disable/`,
                           // `http://localhost:8000/gigs/${gig.id}/disable/`,
                           "POST"
                         );
@@ -263,7 +263,7 @@ const GigPage = () => {
                     onClick={async () => {
                       try {
                         await apiClient(
-                          `https://talentlink-nloa.onrender.com/gigs/${gig.id}/enable/`,
+                          `/gigs/${gig.id}/enable/`,
                           // `http://localhost:8000/gigs/${gig.id}/enable/`,
                           "POST"
                         );

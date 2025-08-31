@@ -11,9 +11,9 @@ const ProfileGroups = () => {
   useEffect(() => {
     const fetchGroups = async () => {
       try {
-        const my = await apiClient("https://talentlink-nloa.onrender.com/group/my_groups/", "GET");
+        const my = await apiClient("/group/my_groups/", "GET");
         // const my = await apiClient("http://localhost:8000/group/my_groups/", "GET");
-        const joined = await apiClient("https://talentlink-nloa.onrender.com/group/joined_groups/", "GET");
+        const joined = await apiClient("/group/joined_groups/", "GET");
         // const joined = await apiClient("http://localhost:8000/group/joined_groups/", "GET");
 
         setMyGroups(my.groups || []);

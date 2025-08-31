@@ -15,7 +15,7 @@ const CompletedJobs = () => {
         const role = userData?.details?.role === "client" ? "client" : "freelancer";
         const res = await apiClient(
           // `http://localhost:8000/jobstatus/${role}/completed/`,
-          `https://talentlink-nloa.onrender.com/jobstatus/${role}/completed/`,
+          `/jobstatus/${role}/completed/`,
           "GET"
         );
         setJobs(res || []);

@@ -53,7 +53,7 @@ const MainPage = () => {
     }, [location])
 
     const handleLogout = () => {
-        window.location.href = "https://talentlink-nloa.onrender.com/auth/accounts/logout"
+        window.location.href = "/auth/accounts/logout"
         // window.location.href = "http://localhost:8000/auth/accounts/logout"
     }
 
