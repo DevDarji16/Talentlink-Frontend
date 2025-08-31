@@ -8,6 +8,7 @@ const getCookie = (name) => {
       const trimmed = cookie.trim();
       if (trimmed.startsWith(name + '=')) {
         cookieValue = decodeURIComponent(trimmed.substring(name.length + 1));
+        console.log(cookieValue)
         break;
       }
     }
