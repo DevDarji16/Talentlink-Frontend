@@ -54,6 +54,12 @@ const App = () => {
   const navigate = useNavigate()
   const location = useLocation()
   useEffect(() => {
+  fetch("https://talentlink-nloa.onrender.com/csrf/", {
+    method: "GET",
+    credentials: "include", 
+  });
+}, []);
+  useEffect(() => {
 
     const check_login = async () => {
       const data=await apiClient('/check_login/','GET')
