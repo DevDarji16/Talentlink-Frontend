@@ -6,8 +6,8 @@ const Onboarding = () => {
   const navigate=useNavigate()
   useEffect(() => {
 
-      fetch('http://localhost:8000/check_user/', {
-      // fetch('https://talentlink-nloa.onrender.com/check_user/', {
+      // fetch('http://localhost:8000/check_user/', {
+      fetch('https://talentlink-nloa.onrender.com/check_user/', {
         method:'GET',
             credentials: 'include'
           })
