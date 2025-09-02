@@ -1,12 +1,38 @@
-# React + Vite
+# TalentLink
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**TalentLink** is a freelance platform that connects clients with freelancers and freelancer groups for jobs, projects, and collaborations.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Authentication**
+  - Google OAuth login
+  - Role-based onboarding: Client, Freelancer
+  - Multi-step onboarding: role selection → username → profile setup
 
-## Expanding the ESLint configuration
+- **Profiles**
+  - Individual freelancer profiles
+  - Freelancer groups (create & manage groups)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Jobs**
+  - Clients can post jobs
+  - Freelancers (individual or group leaders) can apply to jobs
+  - Clients can view applications (separated into individual and group sections)
+
+- **Gigs**
+  - Freelancers can create and manage gigs (service listings)
+  - Clients can browse gigs
+
+- **Messaging**
+  - Clients can message freelancers directly from job applications
+  - Real-time chat (WebSockets)
+
+- **Collaboration Tools**
+  - Whiteboard integration with Excalidraw
+
+- **Workflow**
+  - Job application, negotiation, and hiring flow
+  - Job completion system
+  - Client reviews for freelancers
+
+- **Dashboards**
+  - Separate dashboards for clients and freelancers to track jobs, gigs, and applications
