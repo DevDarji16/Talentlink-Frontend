@@ -29,6 +29,7 @@ export const apiClient = async (url, method = 'GET', body = null) => {
   // Add the CSRF token to non-GET requests initially
   if (method.toUpperCase() !== 'GET') {
     options.headers['X-CSRFToken'] = getCookie('csrftoken');
+    console.log(getCookie('csrftoken'))
   }
 
   if (body) {
