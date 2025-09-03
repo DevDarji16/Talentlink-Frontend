@@ -53,66 +53,33 @@ const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate()
   const location = useLocation()
-//   useEffect(() => {
-//   fetch("https://talentlink-nloa.onrender.com/csrf/", {
-//     method: "GET",
-//     credentials: "include", 
-//   });
-// }, []);
-//   useEffect(() => {
+  useEffect(() => {
+  fetch("https://talentlink-nloa.onrender.com/csrf/", {
+    method: "GET",
+    credentials: "include", 
+  });
+}, []);
+  useEffect(() => {
 
-//     const check_login = async () => {
-//       const data=await apiClient('/check_login/','GET')
-//       // const data = await apiClient('http://localhost:8000/check_login/', 'GET')
-//       setIsLoggedIn(data.authenticated)
-//       setUserData(data)
-//       console.log('userdata', data)
+    const check_login = async () => {
+      const data=await apiClient('/check_login/','GET')
+      // const data = await apiClient('http://localhost:8000/check_login/', 'GET')
+      setIsLoggedIn(data.authenticated)
+      setUserData(data)
+      console.log('userdata', data)
 
-//       if (data.authenticated) {
-//         if (location.pathname === '/') {
+      if (data.authenticated) {
+        if (location.pathname === '/') {
 
-//           // navigate('/profile')
-//         }
+          // navigate('/profile')
+        }
 
-//       }
-
-
-//     }
-//     check_login()
-//   }, [])
-
- useEffect(() => {
-    const initializeApp = async () => {
-      try {
-        // Step 1: ALWAYS fetch the CSRF token first to set the cookie.
-        console.log("Fetching CSRF token...");
-        await fetch("https://talentlink-nloa.onrender.com/csrf/", {
-          method: "GET",
-          credentials: "include",
-        });
-        console.log("CSRF token request sent. Now checking login status.");
-
-        // Step 2: Now that the cookie is likely set, check the login status.
-        const data = await apiClient('/check_login/', 'GET');
-        setIsLoggedIn(data.authenticated);
-        setUserData(data);
-        console.log('userdata', data);
-
-      } catch (error) {
-        console.error("Initialization failed:", error);
-        // Still set logged out state on error
-        setIsLoggedIn(false);
-        setUserData({});
-      } finally {
-        // Step 3: Stop showing the loading screen
-        setLoading(false);
       }
-    };
-
-    initializeApp();
-  }, []); // The empty array [] ensures this runs only once on app startup.
 
 
+    }
+    check_login()
+  }, [])
   return (
     <div onClick={() => setIsOpen(false)}>
       <Theme.Provider value={theme}>

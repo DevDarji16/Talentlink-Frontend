@@ -1,70 +1,57 @@
-// In src/apiClient.js
-
+// apiClient.js
 const getCookie = (name) => {
+  let cookieValue = null;
   if (document.cookie && document.cookie !== '') {
     const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-      if (cookie.substring(0, name.length + 1) === (name + '=')) {
-        return decodeURIComponent(cookie.substring(name.length + 1));
+    for (let cookie of cookies) {
+      const trimmed = cookie.trim();
+      if (trimmed.startsWith(name + '=')) {
+        cookieValue = decodeURIComponent(trimmed.substring(name.length + 1));
+        break;
       }
     }
   }
-  return null;
+  return cookieValue;
 };
 
 const BASE_URL = "https://talentlink-nloa.onrender.com";
 
-/**
- * This function makes a simple GET request to the backend.
- * Its only purpose is to receive the `csrftoken` cookie in the response.
- */
-export const ensureCsrfToken = () => {
-  return fetch(BASE_URL + "/csrf/", {
-    method: "GET",
-    credentials: "include",
-  });
-};
-
 export const apiClient = async (url, method = 'GET', body = null) => {
-  const options = {
+  const csrfToken = getCookie('csrftoken');
+  
+  let options = {
     method,
     headers: {
       'Content-Type': 'application/json',
     },
-    credentials: 'include'
+    credentials: 'include'  // This is crucial for cookies
   };
 
-  // Only add the CSRF token for 'unsafe' methods.
-  if (!['GET', 'HEAD', 'OPTIONS'].includes(method.toUpperCase())) {
-    const csrfToken = getCookie('csrftoken');
-    
-    // **THE FIX**: Only set the header if the token is a valid string.
-    if (csrfToken) {
-      options.headers['X-CSRFToken'] = csrfToken;
-    } else {
-      console.error("CSRF token is missing. The request will likely fail.");
-      // You could try calling ensureCsrfToken() here as a last resort,
-      // but it's better to do it when the app loads.
-    }
+  // Only add CSRF token for non-GET requests
+  if (method !== 'GET' && csrfToken) {
+    options.headers['X-CSRFToken'] = csrfToken;
   }
 
   if (body) {
     options.body = JSON.stringify(body);
   }
 
-  const response = await fetch(BASE_URL + url, options);
-
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({
-      detail: `Request failed with status ${response.status}`
-    }));
-    throw new Error(JSON.stringify(errorData));
+  try {
+    const response = await fetch(BASE_URL + url, options);
+    
+    if (response.status === 403) {
+      // CSRF token might be missing or invalid, try to get a new one
+      await fetch(BASE_URL + "/csrf/", {
+        method: "GET",
+        credentials: "include",
+      });
+      // Retry the original request
+      return await fetch(BASE_URL + url, options);
+    }
+    
+    return response.json();
+  } catch (error) {
+    console.error('API call failed:', error);
+    throw error;
   }
-
-  if (response.status === 204) { // Handle No Content response
-    return null;
-  }
-
-  return response.json();
 };
