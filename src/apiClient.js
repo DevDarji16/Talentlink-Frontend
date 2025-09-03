@@ -18,7 +18,8 @@ const BASE_URL = "https://talentlink-nloa.onrender.com";
 
 export const apiClient = async (url, method = 'GET', body = null) => {
   const csrfToken = getCookie('csrftoken');
-  
+  console.log(csrfToken)
+
   let options = {
     method,
     headers: {
@@ -29,6 +30,8 @@ export const apiClient = async (url, method = 'GET', body = null) => {
 
   // Only add CSRF token for non-GET requests
   if (method !== 'GET' && csrfToken) {
+  console.log(csrfToken)
+
     options.headers['X-CSRFToken'] = csrfToken;
   }
 
@@ -37,6 +40,8 @@ export const apiClient = async (url, method = 'GET', body = null) => {
   }
 
   try {
+  console.log('csrf token ',csrfToken)
+
     const response = await fetch(BASE_URL + url, options);
     
     if (response.status === 403) {
