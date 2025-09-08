@@ -17,7 +17,6 @@ useEffect(() => {
     try {
       const canvas = await apiClient(`/canvas/${canvasId}/`)
       // const canvas = await apiClient(`http://localhost:8000/canvas/${canvasId}/`)
-      console.log("Canvas from API:", canvas)
 
       setTitle(canvas.title)
       setCanvasData({

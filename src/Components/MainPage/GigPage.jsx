@@ -86,7 +86,7 @@ const GigPage = () => {
 
         const data = await apiClient(`/gig/${id}`, "GET");
         // const data = await apiClient(`http://localhost:8000/gig/${id}`, "GET");
-        console.log('og', data.gig)
+      
         setGig(data.gig);
 
         // fetch application status

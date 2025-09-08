@@ -14,7 +14,6 @@ const ProfileFreelancerApplications = () => {
           'GET'
         );
         setApplications(res.applications || []);
-        console.log(res);
       } catch (error) {
         console.error("Error fetching applications:", error);
       } finally {

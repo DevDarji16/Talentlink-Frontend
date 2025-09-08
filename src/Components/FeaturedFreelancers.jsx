@@ -15,7 +15,7 @@ export default function FeaturedFreelancers({ theme }) {
                 // const res = await fetch("http://localhost:8000/gigs/");
                 const data = await apiClient("/gigs/", "GET");
                 // const data = await res.json();
-                // console.log(data)
+             
                 setFeatured(data); // directly set gigs as featured
             } catch (err) {
                 console.error("Error fetching gigs:", err);

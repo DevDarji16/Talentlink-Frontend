@@ -18,7 +18,6 @@ const FreelancerProfile = () => {
       try {
         // const data = await apiClient(`http://localhost:8000/freelancer/${username}/`, 'GET');
         const data = await apiClient(`/freelancer/${username}/`, 'GET');
-        console.log(data)
         setProfile(data.userprofile);
       } catch (error) {
         console.error('Error fetching profile:', error);

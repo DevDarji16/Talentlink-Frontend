@@ -18,7 +18,6 @@ const Discover = () => {
         // const res = await fetch('http://localhost:8000/gigs/');
         const res = await fetch('/gigs/');
         const data = await res.json();
-        console.log(data)
         setGigs(data);
       } catch (err) {
         console.error('Error fetching gigs:', err);

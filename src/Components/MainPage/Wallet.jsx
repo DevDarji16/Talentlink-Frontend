@@ -37,7 +37,6 @@ const Wallet = () => {
       // const res = await apiClient("http://localhost:8000/wallet/add/", "POST", {
         amount: parseFloat(amount),
       });
-      console.log(res)
       toast.success("Money added successfully!");
       setBalance(res.balance);
       setTransactions((prev) => [res.transaction, ...prev]);

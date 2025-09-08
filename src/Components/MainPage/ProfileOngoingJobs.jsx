@@ -22,7 +22,6 @@ const ProfileOngoingJobs = ({ role }) => {
 
 
         const res = await apiClient(url, "GET");
-        console.log("ongoing", res);
         setJobs(res.data || []);
       } catch (err) {
         console.error("Error fetching ongoing jobs:", err);

@@ -25,7 +25,6 @@ const JobPage = () => {
         // Fetch job details
         const data = await apiClient(`/job/${id}`, "GET");
         // const data = await apiClient(`http://localhost:8000/job/${id}`, "GET");
-        console.log('AI data',data)
         setJob(data.job);
 
         // Fetch application status (only if freelancer)

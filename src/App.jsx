@@ -63,7 +63,6 @@ const App = () => {
       // const data = await apiClient('http://localhost:8000/check_login/', 'GET')
       setIsLoggedIn(data.authenticated)
       setUserData(data)
-      console.log('userdata', data)
 
       if (data.authenticated) {
         if (location.pathname === '/') {

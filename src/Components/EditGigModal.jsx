@@ -17,7 +17,6 @@ const EditGigModal = ({ isOpen, onClose, gig, setGig }) => {
         "POST",
         { title, description, price }
       );
-      console.log(res.gig)
       setGig(res.gig)
 
       toast.success("Gig updated successfully!");

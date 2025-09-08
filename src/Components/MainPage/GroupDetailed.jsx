@@ -369,7 +369,7 @@ const GroupDetailed = () => {
                       // const res = await apiClient(`http://localhost:8000/group/${id}/remove_member/`, "POST", {
                         member_id: memberToRemove.id,
                       })
-                      console.log("remove", res)
+                     
                       setGroup((prev) => ({
                         ...prev,
                         members: prev.members.filter((m) => m.id !== memberToRemove.id),

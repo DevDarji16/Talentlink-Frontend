@@ -18,7 +18,7 @@ const GigReviews = ({ gigId,reviews,setReviews }) => {
           "GET"
         );
         setReviews(res.reviews || []);
-        console.log(res.reviews)
+       
         setAvgRating(res.avg_rating || 0);
       } catch (err) {
         console.error("Error fetching gig reviews:", err);

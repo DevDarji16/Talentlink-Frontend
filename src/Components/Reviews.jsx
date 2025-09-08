@@ -28,7 +28,6 @@ const Reviews = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     // Handle review submission logic here
-    console.log("Review submitted:", formData)
     // Reset form after submission
     setFormData({ name: "", message: "" })
   }

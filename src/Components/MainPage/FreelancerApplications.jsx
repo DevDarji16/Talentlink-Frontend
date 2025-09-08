@@ -13,7 +13,6 @@ const FreelancerApplications = () => {
     try {
       const res = await apiClient("/applications/freelancer/", "GET");
       // const res = await apiClient("http://localhost:8000/applications/freelancer/", "GET");
-      console.log("Freelancer Applications:", res);
       setApplications(res || []);
     } catch (err) {
       console.error("Error fetching freelancer applications:", err);

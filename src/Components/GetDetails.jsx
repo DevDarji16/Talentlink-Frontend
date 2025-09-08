@@ -113,11 +113,9 @@ const GetDetails = () => {
     }
 
     const finalData = { ...formData, profilepic: uploadedPhotoUrl }
-    console.log(finalData)
 
     const data = await apiClient('/create_profile/', 'POST', finalData );
     // const data = await apiClient("http://localhost:8000/create_profile/", "POST", finalData)
-    console.log("backend", data)
     if (data.id) {
       navigate("/profile")
     }

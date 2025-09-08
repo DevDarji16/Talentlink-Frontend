@@ -29,7 +29,6 @@ const MainPage = () => {
     }
 
     useEffect(() => {
-        console.log(userData)
         const savedTheme = localStorage.getItem("theme")
         if (savedTheme) {
             setTheme(savedTheme)
@@ -48,7 +47,6 @@ const MainPage = () => {
     }, [theme])
 
     useEffect(() => {
-        console.log("current", currentPage)
         setActiveItem(currentPage)
     }, [location])
 

@@ -38,7 +38,6 @@ const CreateGroup = () => {
 
       // const data = await apiClient('http://localhost:8000/group/create/', 'POST', groupData);
       const data = await apiClient('/group/create/', 'POST', groupData);
-      console.log(data)
       if(data.message==='success'){
         navigate(`/groups/${data.group.id}`)
       }

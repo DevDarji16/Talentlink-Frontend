@@ -16,7 +16,6 @@ const Notifications = () => {
       const data = await apiClient("/notifications/", "GET");
       // const data = await apiClient("http://localhost:8000/notifications/", "GET");
       setNotifications(data);
-      console.log(data)
     } catch (err) {
       setError("Failed to fetch notifications");
     } finally {
@@ -25,8 +24,7 @@ const Notifications = () => {
   };
 
   const handleInviteResponse = async (inviteId, n_id,action) => {
-    console.log('Invite id', inviteId)
-    console.log('N id', n_id)
+    
     try {
       await apiClient(`/group/${inviteId}/respond`, "POST", {n_id,action} );
       // await apiClient(`http://localhost:8000/group/${inviteId}/respond`, "POST", {n_id,action} );

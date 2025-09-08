@@ -9,7 +9,6 @@ const ReviewAnalysisModal = ({ isOpen, onClose, reviews }) => {
 
     useEffect(() => {
         if (isOpen && reviews.length > 0) {
-            console.log('reviews in modal', reviews)
             analyzeReviews();
         }
     }, [isOpen]);
@@ -18,7 +17,6 @@ const ReviewAnalysisModal = ({ isOpen, onClose, reviews }) => {
         setLoading(true);
         try {
             const text = reviews.map(r => r.comment).join("\n");
-            console.log('review wala text', text)
 
             const response = await window.puter.ai.chat(
                 [

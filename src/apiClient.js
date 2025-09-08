@@ -21,9 +21,7 @@ export const initCsrf = async () => {
     }
 
     const data = await res.json();
-    console.log('these is new data to work into',data)
     csrfToken = data.csrfToken;
-    console.log("CSRF token initialized:", csrfToken);
   } catch (error) {
     console.error("Error initializing CSRF:", error);
   }

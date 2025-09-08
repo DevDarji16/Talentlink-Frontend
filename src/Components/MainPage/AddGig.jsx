@@ -62,10 +62,8 @@ const AddGig = () => {
                 images: uploadedURLs,
             };
 
-            console.log(gigData)
             // const data = await apiClient('http://localhost:8000/gigs/', 'POST', gigData)
             const data = await apiClient('/gigs/', 'POST', gigData)
-            console.log('added gig',data)
             if(data.id){
                 navigate('/profile')
                 setTitle('');

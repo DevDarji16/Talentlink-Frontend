@@ -15,7 +15,6 @@ const ProfileClientApplications = () => {
           // "http://localhost:8000/applications/client/",
           "GET"
         );
-        console.log("Client Applications:", res);
         setApplications(res || []);
       } catch (err) {
         console.error("Error fetching client applications:", err);

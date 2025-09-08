@@ -49,7 +49,6 @@ const AddProject = () => {
                 image: imageUrl,
                 skills: skills
             })
-            console.log('added project', data)
             setTitle('');
             setDescription('');
             setProjectLink('');

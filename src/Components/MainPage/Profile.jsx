@@ -60,7 +60,6 @@ const Profile = () => {
         const data = await apiClient("/get_profile/", "GET")
         // const data = await apiClient("http://localhost:8000/get_profile/", "GET")
         setProfile(data.userprofile)
-        console.log("user profile ", data.userprofile)
       } catch (error) {
         console.error("Error fetching profile:", error)
       } finally {

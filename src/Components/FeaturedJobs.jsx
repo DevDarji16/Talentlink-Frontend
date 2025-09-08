@@ -13,7 +13,6 @@ const FeaturedJobs = ({ theme }) => {
                 // const data = await apiClient("http://localhost:8000/jobs/", "GET");
                 const data = await apiClient("/jobs/", "GET");
                 setJobs(data);
-                console.log(data)
             } catch (err) {
                 console.error("Error fetching jobs:", err);
             }

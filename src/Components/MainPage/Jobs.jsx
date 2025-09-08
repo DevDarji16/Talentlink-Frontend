@@ -12,12 +12,10 @@ const Jobs = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    console.log(theme)
     const fetchJobs = async () => {
       try {
         const data = await apiClient('/jobs/', 'GET');
         // const data = await apiClient('http://localhost:8000/jobs/', 'GET');
-        console.log(data)
         setJobs(data);
       } catch (err) {
         console.error('Error fetching jobs:', err);

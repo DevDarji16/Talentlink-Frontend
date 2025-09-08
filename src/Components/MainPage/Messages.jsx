@@ -30,7 +30,6 @@ const Messages = ({ initialUser }) => {
           // "http://localhost:8000/messages/get_conversations/",
           "GET"
         );
-        console.log(res)
         setConversations(res || []);
       } catch {
         toast.error("Failed to load conversations");
