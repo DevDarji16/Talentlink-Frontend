@@ -9,7 +9,7 @@ import Register from './Components/Register'
 import Profile from './Components/MainPage/Profile'
 import GetDetails from './Components/GetDetails'
 import NotFound from './Components/NotFound'
-import { apiClient } from './apiClient'
+import { apiClient, initCsrf } from './apiClient'
 import Discover from './Components/MainPage/Discover'
 import MainPage from './Components/MainPage'
 import Dashboard from './Components/MainPage/Dashboard'
@@ -54,10 +54,7 @@ const App = () => {
   const navigate = useNavigate()
   const location = useLocation()
   useEffect(() => {
-  fetch("https://talentlink-nloa.onrender.com/csrf/", {
-    method: "GET",
-    credentials: "include", 
-  });
+  initCsrf()
 }, []);
   useEffect(() => {
 
