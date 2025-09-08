@@ -1,19 +1,14 @@
-// apiClient.js
 
 let csrfToken = null;
 
 const BASE_URL = "https://talentlink-nloa.onrender.com";
 
-/**
- * Initialize CSRF token by hitting backend endpoint.
- * Make sure your Django backend has a view like:
- *   def get_csrf(request): return JsonResponse({"csrfToken": get_token(request)})
- */
+
 export const initCsrf = async () => {
   try {
     const res = await fetch(`${BASE_URL}/csrf/`, {
       method: "GET",
-      credentials: "include", // ensures cookies (sessionid, csrftoken) are sent/stored
+      credentials: "include", 
     });
 
     if (!res.ok) {
@@ -27,19 +22,16 @@ export const initCsrf = async () => {
   }
 };
 
-/**
- * Generic API client for making requests to Django backend
- */
+
 export const apiClient = async (url, method = "GET", body = null) => {
   let options = {
     method,
-    credentials: "include", // very important for cookies (sessionid, csrftoken)
+    credentials: "include", 
     headers: {
       "Content-Type": "application/json",
     },
   };
 
-  // Attach CSRF token only for unsafe methods
   if (method !== "GET" && csrfToken) {
     options.headers["X-CSRFToken"] = csrfToken;
   }
@@ -51,7 +43,6 @@ export const apiClient = async (url, method = "GET", body = null) => {
   try {
     let response = await fetch(BASE_URL + url, options);
 
-    // If 403 (CSRF fail), refresh token and retry once
     if (response.status === 403) {
       console.warn("CSRF failed, re-initializing...");
       await initCsrf();
