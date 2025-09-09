@@ -69,10 +69,17 @@ const Messages = ({ initialUser }) => {
     // Setup WebSocket
     if (wsRef.current) wsRef.current.close();
 
-    const ws = new WebSocket(
-      `ws://localhost:8000/ws/chat/${selectedUser.conversationId}/`
-    );
+    // const ws = new WebSocket(
+    //   `ws://localhost:8000/ws/chat/${selectedUser.conversationId}/`
+    // );
 
+
+    const wsProtocol = window.location.protocol === "https:" ? "wss" : "ws";
+const wsHost = "talentlink-nloa.onrender.com"; // your backend domain
+
+const ws = new WebSocket(
+  `${wsProtocol}://${wsHost}/ws/chat/${selectedUser.conversationId}/`
+);
     ws.onopen = () => console.log("WebSocket connected");
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
