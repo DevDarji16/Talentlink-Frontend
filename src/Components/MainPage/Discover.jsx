@@ -16,7 +16,7 @@ const Discover = () => {
 
       try {
         // const res = await fetch('http://localhost:8000/gigs/');
-        const res = await fetch('/gigs/');
+        const res = await fetch('https://talentlink-nloa.onrender.com/gigs/');
         const data = await res.json();
         setGigs(data);
       } catch (err) {
