@@ -39,7 +39,8 @@ export default function FeaturedFreelancers({ theme }) {
 
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 justify-center justify-items-center">
+
                 {featured.slice(0, 4).map((gig) => (
                     <article
                         key={gig.id}

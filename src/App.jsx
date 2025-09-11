@@ -38,6 +38,7 @@ import DraftDetail from './Components/DraftDetail'
 import ChatbotWidget from './Components/ChatbotWidget'
 import JobDetail from './Components/JobDetail'
 import TalentLinkHome from './Components/TalentLinkHome'
+import About from './AboutComponent/About'
 
 export const Role = createContext()
 export const SetRole = createContext()
@@ -99,6 +100,7 @@ const App = () => {
                 <Route path='/get-details' element={<GetDetails />} />
                 <Route path='/register' element={<Register />} />
                 <Route path='/mainpage' element={<MainPage />} />
+                <Route path='/about' element={<About />} />
                 <Route path='*' element={<NotFound />} />
                 <Route element={<MainPage />}>
                 <Route path="/canvas/:canvasId" element={<CanvasEditor />} />

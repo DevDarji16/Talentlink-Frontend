@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import FeaturedFreelancers from "./FeaturedFreelancers";
 import FeaturedJobs from "./FeaturedJobs";
 import { Theme, ThemeSet, UserData } from "../App";
+import BackendToast from "../Toast/BackendToast";
 
 export default function TalentLinkHome() {
   const theme = useContext(Theme)
@@ -151,6 +152,7 @@ export default function TalentLinkHome() {
       : "bg-neutral-50 text-neutral-900"
       }`}>
       {/* Enhanced Smooth Custom Cursor */}
+      <BackendToast />
       <div
         ref={cursorRef}
         className={`fixed sm:flex hidden z-[100] pointer-events-none w-8 h-8 rounded-full border  transition-all duration-200 ease-out ${theme === "dark"
@@ -393,10 +395,9 @@ export default function TalentLinkHome() {
             <ul className={`space-y-1 ${theme === "dark" ? "text-neutral-400" : "text-neutral-500"
               }`}>
               <li>
-                <a className={`hover:${theme === "dark" ? "text-neutral-200" : "text-neutral-800"
-                  } cursor-hover transition-colors duration-200`} href="#">
-                  About
-                </a>
+                    <Link className={`hover:${theme === "dark" ? "text-neutral-200" : "text-neutral-800"
+                  } cursor-hover transition-colors duration-200`} to={'/about'}>About</Link>
+                  
               </li>
 
             </ul>
